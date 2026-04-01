@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>High-Risk Newborn Module 7 Quiz</title>
+    <title>High-Risk Newborn Module 7 Quizzes</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -28,28 +27,71 @@
             min-height: 100vh;
         }
 
-        .quiz-container {
+        .container {
             background-color: var(--white);
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             max-width: 800px;
             width: 100%;
             padding: 30px;
             position: relative;
+            box-sizing: border-box;
         }
 
         h1 {
             text-align: center;
             color: var(--primary-color);
-            font-size: 24px;
+            font-size: 26px;
             margin-bottom: 5px;
         }
 
         .subtitle {
             text-align: center;
             color: #7f8c8d;
-            font-size: 14px;
+            font-size: 15px;
             margin-bottom: 25px;
+        }
+
+        /* Menu Styles */
+        #menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .menu-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .menu-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .menu-btn.set-b {
+            background-color: #8e44ad;
+        }
+
+        .menu-btn.set-b:hover {
+            background-color: #732d91;
+        }
+
+        /* Quiz Styles */
+        #quiz-container, #results-container {
+            display: none;
         }
 
         .progress-container {
@@ -151,7 +193,7 @@
             margin-top: 30px;
         }
 
-        button {
+        button.nav-btn {
             padding: 12px 24px;
             border: none;
             border-radius: 6px;
@@ -161,34 +203,15 @@
             transition: background-color 0.2s;
         }
 
-        .btn-prev {
-            background-color: #95a5a6;
-            color: white;
-        }
+        .btn-prev { background-color: #95a5a6; color: white; }
+        .btn-prev:hover { background-color: #7f8c8d; }
+        .btn-prev:disabled { background-color: #bdc3c7; cursor: not-allowed; }
 
-        .btn-prev:hover {
-            background-color: #7f8c8d;
-        }
-
-        .btn-prev:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
-        }
-
-        .btn-next {
-            background-color: var(--accent-color);
-            color: white;
-            display: none;
-            /* hidden until answered */
-        }
-
-        .btn-next:hover {
-            background-color: #2980b9;
-        }
+        .btn-next { background-color: var(--accent-color); color: white; display: none; }
+        .btn-next:hover { background-color: #2980b9; }
 
         .results-container {
             text-align: center;
-            display: none;
         }
 
         .results-score {
@@ -199,15 +222,17 @@
         }
 
         .btn-restart {
-            background-color: var(--success-color);
+            background-color: var(--primary-color);
             color: white;
             margin-top: 20px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
         }
-
-        .btn-restart:hover {
-            background-color: #27ae60;
-        }
-
+        .btn-restart:hover { background-color: var(--secondary-color); }
+        
         .error-message {
             color: var(--danger-color);
             text-align: center;
@@ -216,21 +241,26 @@
         }
     </style>
 </head>
-
 <body>
 
-    <div class="quiz-container" id="quiz-box">
-        <h1>Module 7: High-Risk Newborn</h1>
-        <div class="subtitle">30-Item Knowledge Check</div>
+<div class="container">
+    <h1>Module 7: High-Risk Newborn</h1>
+    <div class="subtitle" id="main-subtitle">Select a knowledge check to begin</div>
 
-        <noscript>
-            <div class="error-message">
-                Error: JavaScript is disabled or not supported in this app/browser. <br><br>
-                Please open this file in a standard web browser like Chrome or Safari to take the quiz.
-            </div>
-        </noscript>
+    <noscript>
+        <div class="error-message">
+            Error: JavaScript is disabled or not supported in this app/browser. <br><br>
+            Please open this file in a standard web browser like Chrome or Safari.
+        </div>
+    </noscript>
 
-        <div class="progress-container" id="progress-container">
+    <div id="menu-container">
+        <button class="menu-btn" id="btn-set-a">Take Set A (Original 30 Items)</button>
+        <button class="menu-btn set-b" id="btn-set-b">Take Set B (New 30 Items)</button>
+    </div>
+
+    <div id="quiz-container">
+        <div class="progress-container">
             <div class="progress-text">
                 <span id="question-count">Question 1 of 30</span>
                 <span id="score-tracker">Score: 0</span>
@@ -240,374 +270,564 @@
             </div>
         </div>
 
-        <div id="question-container">
-            <div class="question-text" id="question-text">Loading question...</div>
-            <ul class="options-list" id="options-list">
-            </ul>
-            <div class="feedback-container" id="feedback-container"></div>
-        </div>
+        <div class="question-text" id="question-text">Loading question...</div>
+        <ul class="options-list" id="options-list"></ul>
+        <div class="feedback-container" id="feedback-container"></div>
 
-        <div class="controls" id="controls">
-            <button class="btn-prev" id="btn-prev" disabled>&#8592; Back</button>
-            <button class="btn-next" id="btn-next">Next &#8594;</button>
-        </div>
-
-        <div class="results-container" id="results-container">
-            <h2>Quiz Completed!</h2>
-            <p>You have finished the Module 7 quiz.</p>
-            <div class="results-score" id="final-score">0 / 30</div>
-            <button class="btn-restart" id="btn-restart">Restart Quiz</button>
+        <div class="controls">
+            <button class="nav-btn btn-prev" id="btn-prev" disabled>&#8592; Back</button>
+            <button class="nav-btn btn-next" id="btn-next">Next &#8594;</button>
         </div>
     </div>
 
-    <script>
-        const quizData = [
-            {
-                question: "A preterm infant is traditionally defined as a live-born infant before the end of which week of gestation?",
-                options: ["Week 34", "Week 37", "Week 38", "Week 42"],
-                answer: 1,
-                explanation: "According to the module, a preterm infant is traditionally defined as a live-born infant before the end of week 37 of gestation."
-            },
-            {
-                question: "Infants who fall below the 10th percentile of weight for their age are classified as:",
-                options: ["Appropriate for gestational age (AGA)", "Low-birth-weight infants (LBW)", "Small for gestational age (SGA)", "Large for gestational age (LGA)"],
-                answer: 2,
-                explanation: "Infants falling below the 10th percentile of weight for their age are considered small for gestational age (SGA), regardless of when they were born."
-            },
-            {
-                question: "When observing the physical characteristics of a preterm infant, a nurse would expect to see:",
-                options: ["A head disproportionately small compared to the body", "Abundant subcutaneous fat making veins invisible", "Lanugo covering the back, forearms, forehead, and sides of the face", "Deep, numerous creases on the soles of the feet"],
-                answer: 2,
-                explanation: "Preterm infants typically have lanugo covering the back, forearms, forehead, and sides of the face. They also have a disproportionately large head, little subcutaneous fat, and few or no sole creases."
-            },
-            {
-                question: "When testing the 'Square Window' (wrist flexion) reflex for gestational age, a premature infant at 28-32 weeks will typically exhibit an angle of:",
-                options: ["0 degrees", "30 degrees", "45 degrees", "90 degrees"],
-                answer: 3,
-                explanation: "In a premature infant at 28-32 weeks, the wrist flexion (square window) will exhibit a 90-degree angle. A full-term infant's hand can be flexed onto the arm (0 degrees)."
-            },
-            {
-                question: "A newborn is being evaluated using the Scarf Sign. The elbow reaches near or across the midline of the chest. This finding indicates the infant is likely:",
-                options: ["Full-term", "Post-term", "Premature", "Large for Gestational Age"],
-                answer: 2,
-                explanation: "In a premature infant, there is less muscle tone/resistance, so the elbow will reach near or across the midline during the Scarf Sign maneuver. In a full-term infant, the elbow will not reach the midline."
-            },
-            {
-                question: "On Ballard's physical maturity assessment, an infant with 'parchment, deep cracking, no vessels' skin would receive a score of:",
-                options: ["1", "2", "3", "4"],
-                answer: 3,
-                explanation: "According to the Ballard physical maturity scale provided, 'parchment, deep cracking, no vessels' corresponds to a score of 4."
-            },
-            {
-                question: "A post-term infant may exhibit post-term syndrome, largely due to what physiological factor?",
-                options: ["Overproduction of surfactant", "Placental function declining after 40 weeks", "Excessive accumulation of subcutaneous fat", "Premature closure of the ductus arteriosus"],
-                answer: 1,
-                explanation: "The placenta appears to function effectively for only 40 weeks. After that, it loses its ability to carry nutrients effectively to the fetus, causing the fetus to lose weight and develop post-term syndrome."
-            },
-            {
-                question: "Which of the following is a common complication that post-term babies are at risk for immediately after birth?",
-                options: ["Hyperglycemia", "Excessive vernix caseosa", "Hypoglycemia", "Underdeveloped fingernails"],
-                answer: 2,
-                explanation: "Post-term babies are at risk for hypoglycemia because the fetus had to use stores of glycogen for nourishment in the final weeks of intrauterine life as placental function decreased."
-            },
-            {
-                question: "A preterm infant develops anemia of prematurity. According to the text, a contributing factor to the destruction of red blood cells in this condition is:",
-                options: ["High levels of Vitamin K", "Low levels of Vitamin E", "Excessive lung surfactant", "Elevated reticulocyte count"],
-                answer: 1,
-                explanation: "Low levels of vitamin E, a substance that normally protects red blood cells against oxidation, contributes to the destruction of red blood cells and anemia in premature infants."
-            },
-            {
-                question: "True apnea of the newborn is defined by a pause in respirations lasting longer than how many seconds, accompanied by bradycardia?",
-                options: ["5 seconds", "10 seconds", "15 seconds", "20 seconds"],
-                answer: 3,
-                explanation: "With true apnea, the pause in respirations is more than 20 seconds and bradycardia does occur. Pauses of 5-10 seconds without bradycardia are considered irregular or periodic respirations."
-            },
-            {
-                question: "To prevent episodes of apnea in a premature infant, the nurse might expect the physician to prescribe which of the following medications to stimulate breathing?",
-                options: ["Indomethacin", "Caffeine (methylxanthine)", "Erythropoietin", "Betamethasone"],
-                answer: 1,
-                explanation: "Caffeine, a methylxanthine, may be prescribed to stimulate breathing and help prevent apneic episodes."
-            },
-            {
-                question: "Hyperbilirubinemia evaluation is indicated when serum bilirubin levels in a term newborn are greater than:",
-                options: ["5 mg/dL", "8 mg/dL", "10 mg/dL", "12 mg/dL"],
-                answer: 3,
-                explanation: "The module states that evaluation for hyperbilirubinemia is indicated when serum levels are greater than 12 mg/dL (180 mcmol/L) in a term newborn."
-            },
-            {
-                question: "During phototherapy for hyperbilirubinemia, a nurse notes a grayish-brown discoloration of the infant's skin. This is known as:",
-                options: ["Acrocyanosis", "Kernicterus", "Bronze baby syndrome", "Harlequin sign"],
-                answer: 2,
-                explanation: "Bronze baby syndrome is a grayish-brown discoloration of the skin that can be a complication of phototherapy, and the physician should be notified."
-            },
-            {
-                question: "When applying phototherapy to a newborn, why is it crucial to remove the eye shields or patches at least once per shift (during feeding)?",
-                options: ["To expose the eyes to therapeutic light", "To inspect for infection/irritation and allow for eye contact/bonding", "To measure the pupillary light reflex accurately", "To prevent the development of retinopathy of prematurity"],
-                answer: 1,
-                explanation: "Eye shields should be removed during feedings to inspect the eyes for infection or irritation and to allow for eye contact and bonding with the parents."
-            },
-            {
-                question: "Acute Bilirubin Encephalopathy (kernicterus) results from the deposition of which substance in the brain cells?",
-                options: ["Conjugated (water-soluble) bilirubin", "Indirect or unconjugated bilirubin", "Meconium", "Lactic acid"],
-                answer: 1,
-                explanation: "Acute Bilirubin Encephalopathy is the destruction of brain cells by invasion of indirect or unconjugated bilirubin, which forms from excessive RBC breakdown."
-            },
-            {
-                question: "In an exchange transfusion to treat severe hyperbilirubinemia, what type of donor blood is exclusively used?",
-                options: ["O Rh-positive", "O Rh-negative", "AB Rh-positive", "The exact blood type of the infant"],
-                answer: 1,
-                explanation: "The text specifies that the type of blood used for an exchange transfusion is O Rh-negative blood."
-            },
-            {
-                question: "A premature infant is diagnosed with a persistent patent ductus arteriosus. What medication might be administered to help close it?",
-                options: ["Surfactant", "Caffeine", "Indomethacin", "Betamethasone"],
-                answer: 2,
-                explanation: "Either indomethacin or ibuprofen may be administered to close the patent ductus arteriosus. A side effect of indomethacin is oliguria."
-            },
-            {
-                question: "A cranial ultrasound of a premature infant reveals bleeding within the lateral ventricle without dilation of the ventricle. This is classified as what grade of intraventricular hemorrhage?",
-                options: ["Grade 1", "Grade 2", "Grade 3", "Grade 4"],
-                answer: 1,
-                explanation: "Grade 2 intraventricular hemorrhage is defined as bleeding within the lateral ventricle without dilation of the ventricle."
-            },
-            {
-                question: "The primary underlying cause of Respiratory Distress Syndrome (RDS) in preterm infants is:",
-                options: ["Meconium aspiration", "Low level or absence of surfactant", "Overhydration during labor", "Bacterial infection in utero"],
-                answer: 1,
-                explanation: "The cause of RDS is a low level or absence of surfactant, the phospholipid that lines alveoli and reduces surface tension to keep them from collapsing."
-            },
-            {
-                question: "A newborn exhibits 'seesaw respirations' and an expiratory grunt. The expiratory grunt is the infant's physiological attempt to:",
-                options: ["Clear mucus from the upper airway", "Increase pressure in alveoli on expiration to keep them from collapsing", "Vocalize distress to the mother", "Decrease pulmonary blood flow"],
-                answer: 1,
-                explanation: "Expiratory grunting is caused by closure of the glottis as it tries to increase the pressure in the alveoli on expiration in order to help keep them from collapsing."
-            },
-            {
-                question: "A nurse is assessing an infant using the Silverman and Andersen index. The infant scores a total of 8. What does this score indicate?",
-                options: ["No respiratory distress", "Moderate distress", "Severe distress", "A perfectly healthy, well infant"],
-                answer: 2,
-                explanation: "On the Silverman and Andersen index, a score of 7 to 10 indicates severe respiratory distress."
-            },
-            {
-                question: "A pregnant woman in preterm labor receives betamethasone. The primary purpose of administering this glucocorticosteroid is to:",
-                options: ["Stop uterine contractions", "Prevent maternal infection", "Quicken the formation of lecithin (surfactant) in the fetus", "Increase fetal weight gain"],
-                answer: 2,
-                explanation: "Glucocorticosteroids, such as betamethasone, are administered to quicken the formation of lecithin (lung surfactant), helping prevent RDS."
-            },
-            {
-                question: "A premature newborn in the NICU has an increasing abdominal girth, gastric residuals of undigested milk, and stools positive for occult blood. These are classic signs of:",
-                options: ["Meconium Aspiration Syndrome", "Retinopathy of Prematurity", "Persistent Patent Ductus Arteriosus", "Necrotizing Enterocolitis (NEC)"],
-                answer: 3,
-                explanation: "Signs of NEC include a distended abdomen (increasing girth), stomach not emptying fully (residuals > 2mL), and stool positive for occult blood."
-            },
-            {
-                question: "Retinopathy of prematurity (ROP) is an acquired ocular disease primarily caused by vasoconstriction of immature retinal blood vessels resulting from exposure to:",
-                options: ["Phototherapy lights", "High oxygen concentrations", "Bacterial infections", "Low temperatures"],
-                answer: 1,
-                explanation: "Immature retinal blood vessels constrict when exposed to high oxygen concentrations. Therefore, strict management of PO2 levels is necessary."
-            },
-            {
-                question: "To decrease the incidence of Sudden Infant Death Syndrome (SIDS), the American Academy of Pediatrics recommends which sleep position for newborns?",
-                options: ["Prone", "Side-lying", "Supine", "Elevated head of bed"],
-                answer: 2,
-                explanation: "The AAP recommends putting newborns to sleep on their back (supine) to reduce the risk of SIDS."
-            },
-            {
-                question: "Meconium aspiration syndrome rarely occurs in extremely low-birth-weight infants because:",
-                options: ["They have strong vagal reflexes to prevent aspiration.", "The substance has not passed far enough in the bowel to be at the rectum.", "They produce excessive amniotic fluid that dilutes the meconium.", "Their lungs are too stiff to inhale fluid."],
-                answer: 1,
-                explanation: "Meconium aspiration does not tend to occur in extremely low-birth-weight infants because meconium has not passed far enough in the bowel to be at the rectum in these infants."
-            },
-            {
-                question: "A chest radiograph of an infant with Meconium Aspiration Syndrome typically reveals:",
-                options: ["A 'ground glass' haziness", "A small, shrunken heart shadow", "Bilateral coarse infiltrates with spaces of hyperaeration (honeycomb effect)", "Total opacification of the left lung base"],
-                answer: 2,
-                explanation: "A chest radiograph of an infant with meconium aspiration will show bilateral coarse infiltrates in the lungs with spaces of hyperaeration (a honeycomb effect)."
-            },
-            {
-                question: "A newborn is assessed with short palpebral fissures, a hypoplastic philtrum, a flat midface, and a thin upper lip. These facial changes are characteristic of:",
-                options: ["Necrotizing enterocolitis", "Post-term syndrome", "Fetal Alcohol Spectrum Disorders (FASD)", "Down Syndrome"],
-                answer: 2,
-                explanation: "Facial changes including short palpebral fissures, a hypoplastic philtrum, a flat midface, and a thin upper lip are assessment findings of Fetal Alcohol Spectrum Disorders."
-            },
-            {
-                question: "A priority nursing intervention for a newborn with Fetal Alcohol Spectrum Disorder (FASD) experiencing poor feeding and irritability is to:",
-                options: ["Increase environmental stimuli to keep the infant awake", "Administer large, infrequent feedings", "Administer small feedings, burp well, and decrease environmental stimuli", "Keep the infant continuously in a prone position"],
-                answer: 2,
-                explanation: "Interventions for FASD include administering small feedings and burping well (due to poor suck/swallow reflex), and decreasing environmental stimuli (due to irritability and hypersensitivity)."
-            },
-            {
-                question: "According to the module's Expected Outcomes, a high-risk infant should be able to maintain body temperature at 37.0°C (98.6°F) in an open crib with:",
-                options: ["No blankets", "One added blanket", "Two added blankets and a hat", "Continuous radiant warmer use"],
-                answer: 1,
-                explanation: "The outcome evaluation states an expected outcome is: 'Infant maintains body temperature at 98.6°F (37.0°C) in open crib with one added blanket.'"
-            }
-        ];
+    <div id="results-container" class="results-container">
+        <h2>Quiz Completed!</h2>
+        <p>You have finished this set.</p>
+        <div class="results-score" id="final-score">0 / 30</div>
+        <button class="btn-restart" id="btn-home">Return to Main Menu</button>
+    </div>
+</div>
 
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let userAnswers = new Array(quizData.length).fill(null);
-        let answeredCurrent = false;
+<script>
+    // --- SET A (Original Questions) ---
+    const setAData = [
+        {
+            question: "A preterm infant is traditionally defined as a live-born infant before the end of which week of gestation?",
+            options: ["Week 34", "Week 37", "Week 38", "Week 42"],
+            answer: 1,
+            explanation: "According to the module, a preterm infant is traditionally defined as a live-born infant before the end of week 37 of gestation."
+        },
+        {
+            question: "Infants who fall below the 10th percentile of weight for their age are classified as:",
+            options: ["Appropriate for gestational age (AGA)", "Low-birth-weight infants (LBW)", "Small for gestational age (SGA)", "Large for gestational age (LGA)"],
+            answer: 2,
+            explanation: "Infants falling below the 10th percentile of weight for their age are considered small for gestational age (SGA), regardless of when they were born."
+        },
+        {
+            question: "When observing the physical characteristics of a preterm infant, a nurse would expect to see:",
+            options: ["A head disproportionately small compared to the body", "Abundant subcutaneous fat making veins invisible", "Lanugo covering the back, forearms, forehead, and sides of the face", "Deep, numerous creases on the soles of the feet"],
+            answer: 2,
+            explanation: "Preterm infants typically have lanugo covering the back, forearms, forehead, and sides of the face. They also have a disproportionately large head, little subcutaneous fat, and few or no sole creases."
+        },
+        {
+            question: "When testing the 'Square Window' (wrist flexion) reflex for gestational age, a premature infant at 28-32 weeks will typically exhibit an angle of:",
+            options: ["0 degrees", "30 degrees", "45 degrees", "90 degrees"],
+            answer: 3,
+            explanation: "In a premature infant at 28-32 weeks, the wrist flexion (square window) will exhibit a 90-degree angle. A full-term infant's hand can be flexed onto the arm (0 degrees)."
+        },
+        {
+            question: "A newborn is being evaluated using the Scarf Sign. The elbow reaches near or across the midline of the chest. This finding indicates the infant is likely:",
+            options: ["Full-term", "Post-term", "Premature", "Large for Gestational Age"],
+            answer: 2,
+            explanation: "In a premature infant, there is less muscle tone/resistance, so the elbow will reach near or across the midline during the Scarf Sign maneuver. In a full-term infant, the elbow will not reach the midline."
+        },
+        {
+            question: "On Ballard's physical maturity assessment, an infant with 'parchment, deep cracking, no vessels' skin would receive a score of:",
+            options: ["1", "2", "3", "4"],
+            answer: 3,
+            explanation: "According to the Ballard physical maturity scale provided, 'parchment, deep cracking, no vessels' corresponds to a score of 4."
+        },
+        {
+            question: "A post-term infant may exhibit post-term syndrome, largely due to what physiological factor?",
+            options: ["Overproduction of surfactant", "Placental function declining after 40 weeks", "Excessive accumulation of subcutaneous fat", "Premature closure of the ductus arteriosus"],
+            answer: 1,
+            explanation: "The placenta appears to function effectively for only 40 weeks. After that, it loses its ability to carry nutrients effectively to the fetus, causing the fetus to lose weight and develop post-term syndrome."
+        },
+        {
+            question: "Which of the following is a common complication that post-term babies are at risk for immediately after birth?",
+            options: ["Hyperglycemia", "Excessive vernix caseosa", "Hypoglycemia", "Underdeveloped fingernails"],
+            answer: 2,
+            explanation: "Post-term babies are at risk for hypoglycemia because the fetus had to use stores of glycogen for nourishment in the final weeks of intrauterine life as placental function decreased."
+        },
+        {
+            question: "A preterm infant develops anemia of prematurity. According to the text, a contributing factor to the destruction of red blood cells in this condition is:",
+            options: ["High levels of Vitamin K", "Low levels of Vitamin E", "Excessive lung surfactant", "Elevated reticulocyte count"],
+            answer: 1,
+            explanation: "Low levels of vitamin E, a substance that normally protects red blood cells against oxidation, contributes to the destruction of red blood cells and anemia in premature infants."
+        },
+        {
+            question: "True apnea of the newborn is defined by a pause in respirations lasting longer than how many seconds, accompanied by bradycardia?",
+            options: ["5 seconds", "10 seconds", "15 seconds", "20 seconds"],
+            answer: 3,
+            explanation: "With true apnea, the pause in respirations is more than 20 seconds and bradycardia does occur. Pauses of 5-10 seconds without bradycardia are considered irregular or periodic respirations."
+        },
+        {
+            question: "To prevent episodes of apnea in a premature infant, the nurse might expect the physician to prescribe which of the following medications to stimulate breathing?",
+            options: ["Indomethacin", "Caffeine (methylxanthine)", "Erythropoietin", "Betamethasone"],
+            answer: 1,
+            explanation: "Caffeine, a methylxanthine, may be prescribed to stimulate breathing and help prevent apneic episodes."
+        },
+        {
+            question: "Hyperbilirubinemia evaluation is indicated when serum bilirubin levels in a term newborn are greater than:",
+            options: ["5 mg/dL", "8 mg/dL", "10 mg/dL", "12 mg/dL"],
+            answer: 3,
+            explanation: "The module states that evaluation for hyperbilirubinemia is indicated when serum levels are greater than 12 mg/dL (180 mcmol/L) in a term newborn."
+        },
+        {
+            question: "During phototherapy for hyperbilirubinemia, a nurse notes a grayish-brown discoloration of the infant's skin. This is known as:",
+            options: ["Acrocyanosis", "Kernicterus", "Bronze baby syndrome", "Harlequin sign"],
+            answer: 2,
+            explanation: "Bronze baby syndrome is a grayish-brown discoloration of the skin that can be a complication of phototherapy, and the physician should be notified."
+        },
+        {
+            question: "When applying phototherapy to a newborn, why is it crucial to remove the eye shields or patches at least once per shift (during feeding)?",
+            options: ["To expose the eyes to therapeutic light", "To inspect for infection/irritation and allow for eye contact/bonding", "To measure the pupillary light reflex accurately", "To prevent the development of retinopathy of prematurity"],
+            answer: 1,
+            explanation: "Eye shields should be removed during feedings to inspect the eyes for infection or irritation and to allow for eye contact and bonding with the parents."
+        },
+        {
+            question: "Acute Bilirubin Encephalopathy (kernicterus) results from the deposition of which substance in the brain cells?",
+            options: ["Conjugated (water-soluble) bilirubin", "Indirect or unconjugated bilirubin", "Meconium", "Lactic acid"],
+            answer: 1,
+            explanation: "Acute Bilirubin Encephalopathy is the destruction of brain cells by invasion of indirect or unconjugated bilirubin, which forms from excessive RBC breakdown."
+        },
+        {
+            question: "In an exchange transfusion to treat severe hyperbilirubinemia, what type of donor blood is exclusively used?",
+            options: ["O Rh-positive", "O Rh-negative", "AB Rh-positive", "The exact blood type of the infant"],
+            answer: 1,
+            explanation: "The text specifies that the type of blood used for an exchange transfusion is O Rh-negative blood."
+        },
+        {
+            question: "A premature infant is diagnosed with a persistent patent ductus arteriosus. What medication might be administered to help close it?",
+            options: ["Surfactant", "Caffeine", "Indomethacin", "Betamethasone"],
+            answer: 2,
+            explanation: "Either indomethacin or ibuprofen may be administered to close the patent ductus arteriosus. A side effect of indomethacin is oliguria."
+        },
+        {
+            question: "A cranial ultrasound of a premature infant reveals bleeding within the lateral ventricle without dilation of the ventricle. This is classified as what grade of intraventricular hemorrhage?",
+            options: ["Grade 1", "Grade 2", "Grade 3", "Grade 4"],
+            answer: 1,
+            explanation: "Grade 2 intraventricular hemorrhage is defined as bleeding within the lateral ventricle without dilation of the ventricle."
+        },
+        {
+            question: "The primary underlying cause of Respiratory Distress Syndrome (RDS) in preterm infants is:",
+            options: ["Meconium aspiration", "Low level or absence of surfactant", "Overhydration during labor", "Bacterial infection in utero"],
+            answer: 1,
+            explanation: "The cause of RDS is a low level or absence of surfactant, the phospholipid that lines alveoli and reduces surface tension to keep them from collapsing."
+        },
+        {
+            question: "A newborn exhibits 'seesaw respirations' and an expiratory grunt. The expiratory grunt is the infant's physiological attempt to:",
+            options: ["Clear mucus from the upper airway", "Increase pressure in alveoli on expiration to keep them from collapsing", "Vocalize distress to the mother", "Decrease pulmonary blood flow"],
+            answer: 1,
+            explanation: "Expiratory grunting is caused by closure of the glottis as it tries to increase the pressure in the alveoli on expiration in order to help keep them from collapsing."
+        },
+        {
+            question: "A nurse is assessing an infant using the Silverman and Andersen index. The infant scores a total of 8. What does this score indicate?",
+            options: ["No respiratory distress", "Moderate distress", "Severe distress", "A perfectly healthy, well infant"],
+            answer: 2,
+            explanation: "On the Silverman and Andersen index, a score of 7 to 10 indicates severe respiratory distress."
+        },
+        {
+            question: "A pregnant woman in preterm labor receives betamethasone. The primary purpose of administering this glucocorticosteroid is to:",
+            options: ["Stop uterine contractions", "Prevent maternal infection", "Quicken the formation of lecithin (surfactant) in the fetus", "Increase fetal weight gain"],
+            answer: 2,
+            explanation: "Glucocorticosteroids, such as betamethasone, are administered to quicken the formation of lecithin (lung surfactant), helping prevent RDS."
+        },
+        {
+            question: "A premature newborn in the NICU has an increasing abdominal girth, gastric residuals of undigested milk, and stools positive for occult blood. These are classic signs of:",
+            options: ["Meconium Aspiration Syndrome", "Retinopathy of Prematurity", "Persistent Patent Ductus Arteriosus", "Necrotizing Enterocolitis (NEC)"],
+            answer: 3,
+            explanation: "Signs of NEC include a distended abdomen (increasing girth), stomach not emptying fully (residuals > 2mL), and stool positive for occult blood."
+        },
+        {
+            question: "Retinopathy of prematurity (ROP) is an acquired ocular disease primarily caused by vasoconstriction of immature retinal blood vessels resulting from exposure to:",
+            options: ["Phototherapy lights", "High oxygen concentrations", "Bacterial infections", "Low temperatures"],
+            answer: 1,
+            explanation: "Immature retinal blood vessels constrict when exposed to high oxygen concentrations. Therefore, strict management of PO2 levels is necessary."
+        },
+        {
+            question: "To decrease the incidence of Sudden Infant Death Syndrome (SIDS), the American Academy of Pediatrics recommends which sleep position for newborns?",
+            options: ["Prone", "Side-lying", "Supine", "Elevated head of bed"],
+            answer: 2,
+            explanation: "The AAP recommends putting newborns to sleep on their back (supine) to reduce the risk of SIDS."
+        },
+        {
+            question: "Meconium aspiration syndrome rarely occurs in extremely low-birth-weight infants because:",
+            options: ["They have strong vagal reflexes to prevent aspiration.", "The substance has not passed far enough in the bowel to be at the rectum.", "They produce excessive amniotic fluid that dilutes the meconium.", "Their lungs are too stiff to inhale fluid."],
+            answer: 1,
+            explanation: "Meconium aspiration does not tend to occur in extremely low-birth-weight infants because meconium has not passed far enough in the bowel to be at the rectum in these infants."
+        },
+        {
+            question: "A chest radiograph of an infant with Meconium Aspiration Syndrome typically reveals:",
+            options: ["A 'ground glass' haziness", "A small, shrunken heart shadow", "Bilateral coarse infiltrates with spaces of hyperaeration (honeycomb effect)", "Total opacification of the left lung base"],
+            answer: 2,
+            explanation: "A chest radiograph of an infant with meconium aspiration will show bilateral coarse infiltrates in the lungs with spaces of hyperaeration (a honeycomb effect)."
+        },
+        {
+            question: "A newborn is assessed with short palpebral fissures, a hypoplastic philtrum, a flat midface, and a thin upper lip. These facial changes are characteristic of:",
+            options: ["Necrotizing enterocolitis", "Post-term syndrome", "Fetal Alcohol Spectrum Disorders (FASD)", "Down Syndrome"],
+            answer: 2,
+            explanation: "Facial changes including short palpebral fissures, a hypoplastic philtrum, a flat midface, and a thin upper lip are assessment findings of Fetal Alcohol Spectrum Disorders."
+        },
+        {
+            question: "A priority nursing intervention for a newborn with Fetal Alcohol Spectrum Disorder (FASD) experiencing poor feeding and irritability is to:",
+            options: ["Increase environmental stimuli to keep the infant awake", "Administer large, infrequent feedings", "Administer small feedings, burp well, and decrease environmental stimuli", "Keep the infant continuously in a prone position"],
+            answer: 2,
+            explanation: "Interventions for FASD include administering small feedings and burping well (due to poor suck/swallow reflex), and decreasing environmental stimuli (due to irritability and hypersensitivity)."
+        },
+        {
+            question: "According to the module's Expected Outcomes, a high-risk infant should be able to maintain body temperature at 37.0°C (98.6°F) in an open crib with:",
+            options: ["No blankets", "One added blanket", "Two added blankets and a hat", "Continuous radiant warmer use"],
+            answer: 1,
+            explanation: "The outcome evaluation states an expected outcome is: 'Infant maintains body temperature at 98.6°F (37.0°C) in open crib with one added blanket.'"
+        }
+    ];
 
-        // We wait until the document is completely ready before finding elements
-        document.addEventListener("DOMContentLoaded", function () {
-            const questionTextEl = document.getElementById('question-text');
-            const optionsListEl = document.getElementById('options-list');
-            const feedbackContainerEl = document.getElementById('feedback-container');
-            const btnNext = document.getElementById('btn-next');
-            const btnPrev = document.getElementById('btn-prev');
-            const questionCountEl = document.getElementById('question-count');
-            const scoreTrackerEl = document.getElementById('score-tracker');
-            const progressFillEl = document.getElementById('progress-fill');
+    // --- SET B (New Questions) ---
+    const setBData = [
+        {
+            question: "According to the module, a 'term infant' is born after the beginning of week 38 and before week:",
+            options: ["40 of pregnancy", "41 of pregnancy", "42 of pregnancy", "43 of pregnancy"],
+            answer: 2,
+            explanation: "TERM infants are those born after the beginning of week 38 and before week 42 of pregnancy."
+        },
+        {
+            question: "A very-low-birth-weight (VLBW) infant is defined as an infant weighing:",
+            options: ["Under 2500 g at birth", "Between 1500 g and 2500 g", "Between 1000 g and 1500 g", "Between 500 g and 1000 g"],
+            answer: 2,
+            explanation: "A very-low-birth-weight infant (VLBW) is one weighing 1000 to 1500 g."
+        },
+        {
+            question: "When assessing the female genitalia of a premature infant, a nurse would expect to find:",
+            options: ["Labia minora completely covered by labia majora", "A prominent clitoris and small, widely separated labia majora", "Deep rugae and swelling", "No visible clitoris"],
+            answer: 1,
+            explanation: "In a premature female, the clitoris is very prominent and the labia majora are very small and widely separated."
+        },
+        {
+            question: "Which of the following maternal factors is associated with an increased risk of preterm birth?",
+            options: ["High socioeconomic level", "Age of mother over 35", "Maternal urinary tract infection (UTI)", "A previous post-term birth"],
+            answer: 2,
+            explanation: "Maternal infections (UTI) are listed among the common factors associated with preterm birth, along with low socioeconomic status, smoking, and age less than 20."
+        },
+        {
+            question: "In a physical maturity assessment, an infant at 39-40 weeks' gestation would typically have how much breast tissue?",
+            options: ["No breast tissue", "1-2 mm", "3-4 mm", "5-6 mm"],
+            answer: 3,
+            explanation: "An infant of 39-40 weeks will have 5-6 mm of breast tissue due to maternal hormonal stimulation."
+        },
+        {
+            question: "If an infant receives a total score of 40 points on the Dubowitz/Ballard gestational age scale, what is their estimated gestational age?",
+            options: ["26 weeks", "32 weeks", "38 weeks", "40 weeks"],
+            answer: 3,
+            explanation: "A total score of 40 points is found in infants at term or 40 weeks' gestation."
+        },
+        {
+            question: "A post-term baby may develop polycythemia. This condition is primarily a physiological response to:",
+            options: ["Decreased oxygenation in the final weeks of pregnancy", "Excessive glycogen stores", "Hyperthermia after birth", "Overhydration in utero"],
+            answer: 0,
+            explanation: "Polycythemia may have developed from decreased oxygenation in the final weeks, as the placenta's efficiency declines."
+        },
+        {
+            question: "Which of the following interventions is recommended for an infant experiencing an episode of apnea?",
+            options: ["Administering a cold bath", "Flicking the sole of the foot", "Placing the infant in a prone position", "Deep nasopharyngeal suctioning"],
+            answer: 1,
+            explanation: "Gently stimulating an infant or flicking the sole of the foot often causes the baby to breathe again during an apneic episode."
+        },
+        {
+            question: "To help prevent the development of anemia of prematurity immediately at birth, which practice may be utilized?",
+            options: ["Immediate cord clamping", "Delayed cord clamping", "Prophylactic blood transfusion", "Administration of surfactant"],
+            answer: 1,
+            explanation: "Delayed cord clamping at birth allows a little more blood from the placenta to enter the infant, helping reduce the development of anemia."
+        },
+        {
+            question: "When assessing a newborn for jaundice, the nurse should note that jaundice typically starts at the:",
+            options: ["Feet and spreads upward", "Abdomen and spreads outward", "Head and spreads downward", "Hands and spreads inward"],
+            answer: 2,
+            explanation: "Jaundice starts at the head first and spreads to the chest, abdomen, arms, legs, and finally hands and feet."
+        },
+        {
+            question: "During phototherapy treatment, it is essential for the nurse to cover the infant's:",
+            options: ["Entire abdomen", "Genital area and eyes", "Hands and feet", "Umbilical stump with a sterile dressing"],
+            answer: 1,
+            explanation: "During phototherapy, the nurse must cover the genital area (to prevent irritation) and the newborn's eyes with shields/patches."
+        },
+        {
+            question: "A newborn receiving phototherapy begins passing loose, green stools. The nurse should recognize this as:",
+            options: ["A sign of necrotizing enterocolitis", "An expected finding during treatment", "A symptom of meconium aspiration", "An indication of severe dehydration"],
+            answer: 1,
+            explanation: "Expect loose green stools during phototherapy, as bilirubin is being broken down and excreted."
+        },
+        {
+            question: "Why is early, frequent feeding encouraged for infants with hyperbilirubinemia or acute bilirubin encephalopathy risk?",
+            options: ["To prevent post-term hypoglycemia", "To provide fat-soluble vitamins to protect RBCs", "To stimulate bowel peristalsis and excrete bilirubin through feces", "To increase urine output for renal excretion of bilirubin"],
+            answer: 2,
+            explanation: "Early feeding stimulates bowel peristalsis, hastening the passage of meconium and encouraging the excretion of bilirubin through the feces."
+        },
+        {
+            question: "When preparing donor blood for a newborn exchange transfusion, the blood must be maintained at:",
+            options: ["Room temperature", "Body temperature (98.6 F)", "Refrigerated temperature", "Heated above 100 F"],
+            answer: 0,
+            explanation: "Donor blood must be maintained at room temperature to prevent hypothermia during the exchange transfusion."
+        },
+        {
+            question: "A Grade 3 periventricular/intraventricular hemorrhage is characterized by:",
+            options: ["Bleeding in the germinal matrix only", "Bleeding within the lateral ventricle without dilation", "Bleeding causing enlargement of ventricles", "Bleeding in the intraparenchymal tissue"],
+            answer: 2,
+            explanation: "Grade 3 is defined as bleeding causing enlargement of ventricles."
+        },
+        {
+            question: "A potential long-term complication of intraventricular hemorrhage (IVH) due to bleeding into the narrow aqueduct of Sylvius is:",
+            options: ["Retinopathy", "Hydrocephalus", "Necrotizing Enterocolitis", "Persistent Patent Ductus Arteriosus"],
+            answer: 1,
+            explanation: "A long-term effect of hemorrhage may be the development of hydrocephalus if there is bleeding into the narrow aqueduct of Sylvius."
+        },
+        {
+            question: "Because of noncompliant lungs in Respiratory Distress Syndrome, how much pressure is required for the infant to inspire a first breath?",
+            options: ["10 to 15 cm H2O", "15 to 20 cm H2O", "20 to 30 cm H2O", "40 to 70 cm H2O"],
+            answer: 3,
+            explanation: "High pressure is required to fill the lungs with air for the first time... between 40 and 70 cm H2O to inspire a first breath."
+        },
+        {
+            question: "Which of the following is an early, subtle sign of Respiratory Distress Syndrome (RDS) in a premature infant?",
+            options: ["Tachypnea (more than 60 respirations per minute)", "Pink mucous membranes", "Hyperthermia", "Vigorous crying"],
+            answer: 0,
+            explanation: "Subtle signs that appear as RDS progresses include low body temperature, nasal flaring, and tachypnea (more than 60 respirations per minute)."
+        },
+        {
+            question: "Following the intratracheal administration of surfactant to a preterm infant, the nurse should ensure they DO NOT:",
+            options: ["Change the infant's position", "Assess pulse oximetry", "Suction the endotracheal tube for 1 hour", "Provide supplemental oxygen"],
+            answer: 2,
+            explanation: "The nurse must not suction the endotracheal tube for 1 hour after administration to avoid removing the drug."
+        },
+        {
+            question: "To ventilate an infant with stiff, noncompliant lungs due to RDS without causing pneumothorax, infant ventilators use a reversed inspiratory/expiratory (I/E) ratio of:",
+            options: ["1:2", "2:1", "1:4", "3:1"],
+            answer: 1,
+            explanation: "Infant ventilators are available with a reversed I/E ratio (2:1) to deliver oxygen to stiff lungs without excessive force."
+        },
+        {
+            question: "In the management of severe hypoxemia in newborns, Nitric Oxide is administered because it acts as a:",
+            options: ["Bronchoconstrictor", "Potent pulmonary vascular dilator", "Surfactant substitute", "Red blood cell stimulant"],
+            answer: 1,
+            explanation: "Nitric oxide is a potent vascular dilator. It causes pulmonary vasodilation without decreasing systemic vascular tone."
+        },
+        {
+            question: "What does ECMO stand for in the context of treating severe neonatal respiratory illnesses?",
+            options: ["External Cardiac Monitoring Output", "Extracorporeal Membrane Oxygenation", "Early Continuous Mandatory Oxygen", "Extra Cardiopulmonary Mechanical Oxygenation"],
+            answer: 1,
+            explanation: "ECMO stands for Extracorporeal Membrane Oxygenation, used for severe hypoxemia in illnesses like meconium aspiration and RDS."
+        },
+        {
+            question: "The primary medical intervention to rest the GI tract in an infant diagnosed with Necrotizing Enterocolitis (NEC) is to:",
+            options: ["Provide small, frequent oral milk feeds", "Administer high-dose steroids", "Maintain the infant on IV or total parenteral nutrition (TPN)", "Perform an immediate laparotomy"],
+            answer: 2,
+            explanation: "The infant is maintained on IV or total parenteral nutrition (TPN) solutions to rest the GI tract."
+        },
+        {
+            question: "A low-birth-weight newborn received prolonged oxygen therapy. A follow-up examination for Retinopathy of Prematurity (ROP) should occur before hospital discharge and again at:",
+            options: ["1 to 2 weeks of age", "4 to 6 weeks of age", "3 to 4 months of age", "1 year of age"],
+            answer: 1,
+            explanation: "The eyes should be examined before discharge and again at age 4 to 6 weeks of age to detect any occurrence of ROP."
+        },
+        {
+            question: "In addition to a supine sleep position, which of the following is recommended by the AAP to reduce the risk of SIDS?",
+            options: ["Bed sharing with parents", "Use of a pacifier at sleep times", "Use of soft, plush bedding", "Keeping the room temperature highly elevated"],
+            answer: 1,
+            explanation: "The AAP recommends putting newborns to sleep on their back and with a pacifier, using a firm sleep surface, and avoiding soft beddings/overheating."
+        },
+        {
+            question: "When counseling parents immediately after the sudden loss of an infant to SIDS, it is normal for the nurse to hear parents:",
+            options: ["Blame the medical staff exclusively", "Refuse to speak about the child", "Use both the past and present tense when talking about the child", "Immediately begin planning for another child"],
+            answer: 2,
+            explanation: "In discussing the child, parents often use both the past and present tense as if they are not yet aware of the death."
+        },
+        {
+            question: "Meconium is expelled into the amniotic fluid in utero primarily due to a vagal reflex stimulated by:",
+            options: ["Fetal hyperglycemia", "Maternal dehydration", "Fetal hypoxia", "Uterine hyperstimulation"],
+            answer: 2,
+            explanation: "If hypoxia occurs, a vagal reflex is stimulated, resulting in relaxation of the rectal sphincter, releasing meconium."
+        },
+        {
+            question: "A therapeutic management technique used during labor to dilute the amount of meconium in amniotic fluid and reduce aspiration risk is:",
+            options: ["Amnioinfusion", "Tocolytic administration", "External cephalic version", "Epidural anesthesia"],
+            answer: 0,
+            explanation: "Amnioinfusion can be used to dilute the amount of meconium in amniotic fluid and reduce the risk of aspiration."
+        },
+        {
+            question: "Which of the following congenital anomalies is an assessment finding commonly associated with Fetal Alcohol Spectrum Disorders (FASD)?",
+            options: ["Spina bifida", "Congenital heart disorders", "Cleft palate", "Clubfoot"],
+            answer: 1,
+            explanation: "Congenital heart disorders are listed as a key assessment finding for FASD, along with facial changes and abnormal palmar creases."
+        },
+        {
+            question: "A high-risk newborn has a temperature of 96.8 F (36.0 C). Which nursing diagnosis is most appropriate?",
+            options: ["Ineffective airway clearance", "Ineffective cardiovascular tissue perfusion", "Risk for deficient fluid volume", "Ineffective thermoregulation"],
+            answer: 3,
+            explanation: "A low temperature points to 'Ineffective thermoregulation related to newborn status and stress from birth weight variation.'"
+        }
+    ];
 
-            const questionContainer = document.getElementById('question-container');
-            const controls = document.getElementById('controls');
-            const progressContainer = document.getElementById('progress-container');
-            const resultsContainer = document.getElementById('results-container');
-            const finalScoreEl = document.getElementById('final-score');
-            const btnRestart = document.getElementById('btn-restart');
+    let currentQuizData = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let userAnswers = [];
+    let answeredCurrent = false;
+    let currentSetName = "";
 
-            function initQuiz() {
-                currentQuestionIndex = 0;
-                score = 0;
-                userAnswers = new Array(quizData.length).fill(null);
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuContainer = document.getElementById('menu-container');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const mainSubtitle = document.getElementById('main-subtitle');
+        
+        const questionTextEl = document.getElementById('question-text');
+        const optionsListEl = document.getElementById('options-list');
+        const feedbackContainerEl = document.getElementById('feedback-container');
+        const btnNext = document.getElementById('btn-next');
+        const btnPrev = document.getElementById('btn-prev');
+        const questionCountEl = document.getElementById('question-count');
+        const scoreTrackerEl = document.getElementById('score-tracker');
+        const progressFillEl = document.getElementById('progress-fill');
+        const finalScoreEl = document.getElementById('final-score');
 
-                questionContainer.style.display = 'block';
-                controls.style.display = 'flex';
-                progressContainer.style.display = 'block';
-                resultsContainer.style.display = 'none';
+        // Menu Buttons
+        document.getElementById('btn-set-a').addEventListener('click', () => startQuiz(setAData, 'Set A'));
+        document.getElementById('btn-set-b').addEventListener('click', () => startQuiz(setBData, 'Set B'));
+        document.getElementById('btn-home').addEventListener('click', showMenu);
 
-                loadQuestion();
-            }
+        function showMenu() {
+            menuContainer.style.display = 'flex';
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'none';
+            mainSubtitle.innerText = "Select a knowledge check to begin";
+        }
 
-            function updateProgress() {
-                questionCountEl.innerText = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
-                scoreTrackerEl.innerText = `Score: ${score}`;
-                const percent = ((currentQuestionIndex) / quizData.length) * 100;
-                progressFillEl.style.width = `${percent}%`;
-            }
+        function startQuiz(dataArray, setName) {
+            currentQuizData = dataArray;
+            currentSetName = setName;
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = new Array(currentQuizData.length).fill(null);
+            
+            mainSubtitle.innerText = `${setName} Active`;
+            menuContainer.style.display = 'none';
+            quizContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            
+            loadQuestion();
+        }
 
-            function loadQuestion() {
-                answeredCurrent = userAnswers[currentQuestionIndex] !== null;
-                const currentData = quizData[currentQuestionIndex];
+        function updateProgress() {
+            questionCountEl.innerText = `Question ${currentQuestionIndex + 1} of ${currentQuizData.length}`;
+            scoreTrackerEl.innerText = `Score: ${score}`;
+            const percent = ((currentQuestionIndex) / currentQuizData.length) * 100;
+            progressFillEl.style.width = `${percent}%`;
+        }
 
-                questionTextEl.innerText = `${currentQuestionIndex + 1}. ${currentData.question}`;
-                optionsListEl.innerHTML = '';
-                feedbackContainerEl.style.display = 'none';
-                feedbackContainerEl.className = 'feedback-container';
+        function loadQuestion() {
+            answeredCurrent = userAnswers[currentQuestionIndex] !== null;
+            const currentData = currentQuizData[currentQuestionIndex];
+            
+            questionTextEl.innerText = `${currentQuestionIndex + 1}. ${currentData.question}`;
+            optionsListEl.innerHTML = '';
+            feedbackContainerEl.style.display = 'none';
+            feedbackContainerEl.className = 'feedback-container';
 
-                currentData.options.forEach((optionText, index) => {
-                    const li = document.createElement('li');
-                    li.className = 'option-item';
-                    li.innerText = optionText;
-
-                    if (answeredCurrent) {
-                        li.classList.add('disabled');
-                        if (index === currentData.answer) {
-                            li.classList.add('correct');
-                        } else if (index === userAnswers[currentQuestionIndex]) {
-                            li.classList.add('incorrect');
-                        }
-                    } else {
-                        li.onclick = () => selectOption(index, li);
-                    }
-                    optionsListEl.appendChild(li);
-                });
-
-                btnPrev.disabled = currentQuestionIndex === 0;
-
+            currentData.options.forEach((optionText, index) => {
+                const li = document.createElement('li');
+                li.className = 'option-item';
+                li.innerText = optionText;
+                
                 if (answeredCurrent) {
-                    showFeedback(userAnswers[currentQuestionIndex] === currentData.answer, currentData.explanation);
-                    btnNext.style.display = 'block';
-                    if (currentQuestionIndex === quizData.length - 1) {
-                        btnNext.innerText = 'Finish Quiz';
-                    } else {
-                        btnNext.innerText = 'Next \u2192';
+                    li.classList.add('disabled');
+                    if (index === currentData.answer) {
+                        li.classList.add('correct');
+                    } else if (index === userAnswers[currentQuestionIndex]) {
+                        li.classList.add('incorrect');
                     }
                 } else {
-                    btnNext.style.display = 'none';
+                    li.onclick = () => selectOption(index, li);
                 }
+                optionsListEl.appendChild(li);
+            });
 
-                updateProgress();
-            }
-
-            function selectOption(selectedIndex, selectedElement) {
-                if (answeredCurrent) return;
-                answeredCurrent = true;
-                userAnswers[currentQuestionIndex] = selectedIndex;
-
-                const currentData = quizData[currentQuestionIndex];
-                const isCorrect = (selectedIndex === currentData.answer);
-
-                if (isCorrect) score++;
-
-                const allOptions = optionsListEl.children;
-                for (let i = 0; i < allOptions.length; i++) {
-                    allOptions[i].classList.add('disabled');
-                    allOptions[i].onclick = null;
-
-                    if (i === currentData.answer) {
-                        allOptions[i].classList.add('correct');
-                    } else if (i === selectedIndex && !isCorrect) {
-                        allOptions[i].classList.add('incorrect');
-                    }
-                }
-
-                showFeedback(isCorrect, currentData.explanation);
-                scoreTrackerEl.innerText = `Score: ${score}`;
-
+            btnPrev.disabled = currentQuestionIndex === 0;
+            
+            if (answeredCurrent) {
+                showFeedback(userAnswers[currentQuestionIndex] === currentData.answer, currentData.explanation);
                 btnNext.style.display = 'block';
-                if (currentQuestionIndex === quizData.length - 1) {
+                if (currentQuestionIndex === currentQuizData.length - 1) {
                     btnNext.innerText = 'Finish Quiz';
                 } else {
                     btnNext.innerText = 'Next \u2192';
                 }
+            } else {
+                btnNext.style.display = 'none';
             }
 
-            function showFeedback(isCorrect, explanation) {
-                feedbackContainerEl.style.display = 'block';
-                if (isCorrect) {
-                    feedbackContainerEl.className = 'feedback-container correct-feedback';
-                    feedbackContainerEl.innerHTML = `<strong>Correct!</strong><br><br>${explanation}`;
-                } else {
-                    feedbackContainerEl.className = 'feedback-container incorrect-feedback';
-                    feedbackContainerEl.innerHTML = `<strong>Incorrect.</strong><br><br>${explanation}`;
+            updateProgress();
+        }
+
+        function selectOption(selectedIndex, selectedElement) {
+            if (answeredCurrent) return;
+            answeredCurrent = true;
+            userAnswers[currentQuestionIndex] = selectedIndex;
+            
+            const currentData = currentQuizData[currentQuestionIndex];
+            const isCorrect = (selectedIndex === currentData.answer);
+            
+            if (isCorrect) score++;
+
+            const allOptions = optionsListEl.children;
+            for (let i = 0; i < allOptions.length; i++) {
+                allOptions[i].classList.add('disabled');
+                allOptions[i].onclick = null; 
+                
+                if (i === currentData.answer) {
+                    allOptions[i].classList.add('correct');
+                } else if (i === selectedIndex && !isCorrect) {
+                    allOptions[i].classList.add('incorrect');
                 }
             }
 
-            btnNext.addEventListener('click', () => {
-                if (currentQuestionIndex < quizData.length - 1) {
-                    currentQuestionIndex++;
-                    loadQuestion();
-                } else {
-                    showResults();
-                }
-            });
+            showFeedback(isCorrect, currentData.explanation);
+            scoreTrackerEl.innerText = `Score: ${score}`;
 
-            btnPrev.addEventListener('click', () => {
-                if (currentQuestionIndex > 0) {
-                    currentQuestionIndex--;
-                    loadQuestion();
-                }
-            });
-
-            function showResults() {
-                questionContainer.style.display = 'none';
-                controls.style.display = 'none';
-                progressContainer.style.display = 'none';
-                resultsContainer.style.display = 'block';
-
-                const percentage = Math.round((score / quizData.length) * 100);
-                finalScoreEl.innerText = `${score} / ${quizData.length} (${percentage}%)`;
+            btnNext.style.display = 'block';
+            if (currentQuestionIndex === currentQuizData.length - 1) {
+                btnNext.innerText = 'Finish Quiz';
+            } else {
+                btnNext.innerText = 'Next \u2192';
             }
+        }
 
-            btnRestart.addEventListener('click', initQuiz);
+        function showFeedback(isCorrect, explanation) {
+            feedbackContainerEl.style.display = 'block';
+            if (isCorrect) {
+                feedbackContainerEl.className = 'feedback-container correct-feedback';
+                feedbackContainerEl.innerHTML = `<strong>Correct!</strong><br><br>${explanation}`;
+            } else {
+                feedbackContainerEl.className = 'feedback-container incorrect-feedback';
+                feedbackContainerEl.innerHTML = `<strong>Incorrect.</strong><br><br>${explanation}`;
+            }
+        }
 
-            // Start the quiz
-            initQuiz();
+        btnNext.addEventListener('click', () => {
+            if (currentQuestionIndex < currentQuizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
         });
-    </script>
+
+        btnPrev.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        });
+
+        function showResults() {
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            mainSubtitle.innerText = "Results";
+            
+            const percentage = Math.round((score / currentQuizData.length) * 100);
+            finalScoreEl.innerText = `${score} / ${currentQuizData.length} (${percentage}%)`;
+        }
+    });
+</script>
 
 </body>
-
 </html>

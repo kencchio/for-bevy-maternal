@@ -14,9 +14,9 @@
 
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #f8f0ff 0%, #e8f4fd 50%, #f0fff8 100%);
+            background: #0d0d1a;
             min-height: 100vh;
-            color: #1a1a2e;
+            color: #e2e0f0;
         }
 
         .app {
@@ -93,36 +93,36 @@
         .welcome-screen h1 {
             font-size: clamp(1.3rem, 5vw, 2rem);
             font-weight: 700;
-            color: #4a2c8a;
+            color: #c4b5fd;
             margin-bottom: 6px;
         }
 
         .welcome-screen .subtitle {
             font-size: clamp(0.8rem, 2.5vw, 1rem);
-            color: #6b7280;
+            color: #7c7a9e;
             margin-bottom: 8px;
         }
 
         .welcome-screen .greeting {
             font-size: clamp(0.95rem, 3vw, 1.1rem);
-            color: #374151;
+            color: #ccc8e8;
             margin: 20px 0 28px;
-            background: white;
+            background: #1a1a2e;
             border-radius: 16px;
             padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
             border-left: 4px solid #7c3aed;
             text-align: left;
-            box-shadow: 0 2px 12px rgba(124, 58, 237, .08);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .4);
         }
 
         .greeting span {
-            color: #7c3aed;
+            color: #a78bfa;
             font-weight: 700;
         }
 
         .difficulty-section h2 {
             font-size: clamp(0.95rem, 3vw, 1.1rem);
-            color: #374151;
+            color: #a09bbf;
             margin-bottom: 18px;
         }
 
@@ -134,20 +134,20 @@
         }
 
         .diff-card {
-            background: white;
+            background: #1a1a2e;
             border-radius: 16px;
             padding: clamp(16px, 4vw, 24px) clamp(14px, 3vw, 20px);
             width: clamp(140px, 28vw, 220px);
             cursor: pointer;
-            border: 2px solid transparent;
+            border: 2px solid #2a2a40;
             transition: all 0.22s ease;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, .07);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .4);
             text-align: center;
         }
 
         .diff-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, .13);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, .5);
         }
 
         .diff-card.easy:hover {
@@ -176,7 +176,7 @@
 
         .diff-card p {
             font-size: clamp(0.75rem, 2vw, 0.82rem);
-            color: #6b7280;
+            color: #7c7a9e;
             line-height: 1.5;
         }
 
@@ -190,30 +190,30 @@
         }
 
         .easy .badge {
-            background: #d1fae5;
-            color: #065f46;
+            background: #064e3b;
+            color: #6ee7b7;
         }
 
         .medium .badge {
-            background: #fef3c7;
-            color: #92400e;
+            background: #78350f;
+            color: #fcd34d;
         }
 
         .hard .badge {
-            background: #fee2e2;
-            color: #991b1b;
+            background: #7f1d1d;
+            color: #fca5a5;
         }
 
         .easy h3 {
-            color: #065f46;
+            color: #34d399;
         }
 
         .medium h3 {
-            color: #92400e;
+            color: #fbbf24;
         }
 
         .hard h3 {
-            color: #991b1b;
+            color: #f87171;
         }
 
         /* QUIZ */
@@ -223,7 +223,7 @@
         }
 
         .quiz-header {
-            background: white;
+            background: #1a1a2e;
             border-radius: 16px;
             padding: clamp(12px, 3vw, 16px) clamp(14px, 3vw, 20px);
             margin-bottom: 14px;
@@ -231,7 +231,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, .07);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .4);
             flex-wrap: wrap;
         }
 
@@ -250,15 +250,15 @@
         .quiz-title {
             font-size: clamp(0.78rem, 2.2vw, 0.9rem);
             font-weight: 600;
-            color: #6b7280;
+            color: #7c7a9e;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .score-badge {
-            background: #7c3aed;
-            color: white;
+            background: #4c1d95;
+            color: #e9d5ff;
             padding: 6px clamp(10px, 2.5vw, 16px);
             border-radius: 99px;
             font-size: clamp(0.8rem, 2.2vw, 0.9rem);
@@ -268,8 +268,8 @@
 
         .btn-quit {
             background: transparent;
-            border: 1.5px solid #e5e7eb;
-            color: #9ca3af;
+            border: 1.5px solid #2a2a40;
+            color: #6b6b8a;
             padding: 6px clamp(8px, 2vw, 14px);
             border-radius: 10px;
             font-size: clamp(0.75rem, 2vw, 0.85rem);
@@ -283,13 +283,13 @@
         }
 
         .btn-quit:hover {
-            background: #fee2e2;
+            background: #3b0f0f;
             border-color: #ef4444;
-            color: #991b1b;
+            color: #f87171;
         }
 
         .progress-bar-wrap {
-            background: #e5e7eb;
+            background: #2a2a40;
             border-radius: 99px;
             height: 7px;
             margin-top: 6px;
@@ -305,16 +305,16 @@
 
         .progress-text {
             font-size: 0.75rem;
-            color: #6b7280;
+            color: #6b6b8a;
             text-align: right;
             margin-top: 3px;
         }
 
         .question-card {
-            background: white;
+            background: #1a1a2e;
             border-radius: 20px;
             padding: clamp(18px, 4vw, 28px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, .09);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .4);
             margin-bottom: 14px;
             animation: slideIn 0.35s ease;
         }
@@ -331,8 +331,8 @@
             border-radius: 99px;
             font-size: 0.72rem;
             font-weight: 600;
-            background: #ede9fe;
-            color: #5b21b6;
+            background: #2e1d5e;
+            color: #c4b5fd;
         }
 
         .q-diff-badge {
@@ -343,24 +343,24 @@
         }
 
         .badge-easy {
-            background: #d1fae5;
-            color: #065f46;
+            background: #064e3b;
+            color: #6ee7b7;
         }
 
         .badge-medium {
-            background: #fef3c7;
-            color: #92400e;
+            background: #78350f;
+            color: #fcd34d;
         }
 
         .badge-hard {
-            background: #fee2e2;
-            color: #991b1b;
+            background: #7f1d1d;
+            color: #fca5a5;
         }
 
         .question-text {
             font-size: clamp(0.95rem, 3vw, 1.05rem);
             font-weight: 600;
-            color: #1a1a2e;
+            color: #e2e0f0;
             line-height: 1.6;
             margin-bottom: 20px;
         }
@@ -372,14 +372,14 @@
         }
 
         .option-btn {
-            background: #f9fafb;
-            border: 2px solid #e5e7eb;
+            background: #111122;
+            border: 2px solid #2a2a40;
             border-radius: 12px;
             padding: clamp(10px, 2.5vw, 13px) clamp(12px, 3vw, 16px);
             text-align: left;
             cursor: pointer;
             font-size: clamp(0.87rem, 2.5vw, 0.95rem);
-            color: #374151;
+            color: #ccc8e8;
             transition: all 0.18s ease;
             display: flex;
             align-items: flex-start;
@@ -387,46 +387,46 @@
         }
 
         .option-btn:hover:not(:disabled) {
-            background: #ede9fe;
+            background: #2e1d5e;
             border-color: #7c3aed;
-            color: #4c1d95;
+            color: #ddd6fe;
         }
 
         .option-btn .opt-letter {
             font-weight: 700;
             min-width: 20px;
-            color: #7c3aed;
+            color: #a78bfa;
             flex-shrink: 0;
         }
 
         .option-btn.correct {
-            background: #d1fae5;
+            background: #064e3b;
             border-color: #10b981;
-            color: #065f46;
+            color: #6ee7b7;
         }
 
         .option-btn.correct .opt-letter {
-            color: #065f46;
+            color: #34d399;
         }
 
         .option-btn.wrong {
-            background: #fee2e2;
+            background: #7f1d1d;
             border-color: #ef4444;
-            color: #991b1b;
+            color: #fca5a5;
         }
 
         .option-btn.wrong .opt-letter {
-            color: #991b1b;
+            color: #f87171;
         }
 
         .option-btn.reveal-correct {
-            background: #d1fae5;
+            background: #064e3b;
             border-color: #10b981;
-            color: #065f46;
+            color: #6ee7b7;
         }
 
         .option-btn.reveal-correct .opt-letter {
-            color: #065f46;
+            color: #34d399;
         }
 
         .option-btn:disabled {
@@ -443,15 +443,15 @@
         }
 
         .feedback-box.correct-fb {
-            background: #d1fae5;
+            background: #064e3b;
             border-left: 4px solid #10b981;
-            color: #064e3b;
+            color: #6ee7b7;
         }
 
         .feedback-box.wrong-fb {
-            background: #fee2e2;
+            background: #450a0a;
             border-left: 4px solid #ef4444;
-            color: #7f1d1d;
+            color: #fca5a5;
         }
 
         .feedback-box .fb-title {
@@ -463,7 +463,7 @@
         .feedback-box .fb-info {
             margin-top: 8px;
             padding-top: 8px;
-            border-top: 1px solid rgba(0, 0, 0, .1);
+            border-top: 1px solid rgba(255, 255, 255, .1);
             font-size: clamp(0.82rem, 2.3vw, 0.88rem);
         }
 
@@ -486,12 +486,13 @@
         }
 
         .btn-back {
-            background: #f3f4f6;
-            color: #374151;
+            background: #1e1e30;
+            color: #a09bbf;
+            border: 1px solid #2a2a40;
         }
 
         .btn-back:hover {
-            background: #e5e7eb;
+            background: #2a2a40;
         }
 
         .btn-back:disabled {
@@ -500,16 +501,17 @@
         }
 
         .btn-next {
-            background: #7c3aed;
-            color: white;
+            background: #5b21b6;
+            color: #ede9fe;
         }
 
         .btn-next:hover {
-            background: #6d28d9;
+            background: #4c1d95;
         }
 
         .btn-next:disabled {
-            background: #c4b5fd;
+            background: #2e1d5e;
+            color: #6d5fa3;
             cursor: not-allowed;
         }
 
@@ -518,7 +520,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -530,14 +532,15 @@
         }
 
         .modal-box {
-            background: white;
+            background: #1a1a2e;
             border-radius: 20px;
             padding: clamp(24px, 5vw, 36px);
             max-width: 420px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
             animation: modalIn 0.25s ease;
+            border: 1px solid #2a2a40;
         }
 
         .modal-icon {
@@ -549,13 +552,13 @@
         .modal-box h2 {
             font-size: clamp(1.1rem, 4vw, 1.35rem);
             font-weight: 700;
-            color: #1a1a2e;
+            color: #e2e0f0;
             margin-bottom: 10px;
         }
 
         .modal-box p {
             font-size: clamp(0.88rem, 2.5vw, 0.95rem);
-            color: #6b7280;
+            color: #7c7a9e;
             line-height: 1.6;
             margin-bottom: 24px;
         }
@@ -572,9 +575,9 @@
             border-radius: 12px;
             font-size: 0.95rem;
             font-weight: 600;
-            border: 2px solid #e5e7eb;
-            background: white;
-            color: #374151;
+            border: 2px solid #2a2a40;
+            background: #111122;
+            color: #a09bbf;
             cursor: pointer;
             transition: all 0.18s;
             flex: 1;
@@ -582,7 +585,7 @@
         }
 
         .btn-modal-cancel:hover {
-            background: #f3f4f6;
+            background: #2a2a40;
         }
 
         .btn-modal-quit {
@@ -591,8 +594,8 @@
             font-size: 0.95rem;
             font-weight: 700;
             border: none;
-            background: #ef4444;
-            color: white;
+            background: #991b1b;
+            color: #fecaca;
             cursor: pointer;
             transition: all 0.18s;
             flex: 1;
@@ -600,7 +603,7 @@
         }
 
         .btn-modal-quit:hover {
-            background: #dc2626;
+            background: #7f1d1d;
         }
 
         /* RESULTS */
@@ -611,10 +614,10 @@
         }
 
         .results-card {
-            background: white;
+            background: #1a1a2e;
             border-radius: 20px;
             padding: clamp(24px, 5vw, 36px) clamp(18px, 4vw, 28px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, .09);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .4);
             margin-bottom: 20px;
         }
 
@@ -627,20 +630,20 @@
         .results-card h2 {
             font-size: clamp(1.3rem, 5vw, 1.7rem);
             font-weight: 700;
-            color: #1a1a2e;
+            color: #e2e0f0;
             margin-bottom: 6px;
         }
 
         .results-card .score-big {
             font-size: clamp(2.5rem, 10vw, 3.5rem);
             font-weight: 800;
-            color: #7c3aed;
+            color: #a78bfa;
             margin: 12px 0;
         }
 
         .results-card .score-label {
             font-size: clamp(0.88rem, 2.5vw, 1rem);
-            color: #6b7280;
+            color: #7c7a9e;
         }
 
         .grade-badge {
@@ -661,7 +664,7 @@
         }
 
         .stat-box {
-            background: #f9fafb;
+            background: #111122;
             border-radius: 14px;
             padding: clamp(10px, 3vw, 14px) clamp(14px, 4vw, 22px);
             min-width: 90px;
@@ -676,13 +679,13 @@
 
         .stat-box .stat-lbl {
             font-size: 0.78rem;
-            color: #6b7280;
+            color: #6b6b8a;
             margin-top: 2px;
         }
 
         .btn-restart {
-            background: #7c3aed;
-            color: white;
+            background: #5b21b6;
+            color: #ede9fe;
             padding: clamp(10px, 2.5vw, 13px) clamp(24px, 6vw, 36px);
             border-radius: 14px;
             font-size: clamp(0.92rem, 3vw, 1rem);
@@ -694,7 +697,7 @@
         }
 
         .btn-restart:hover {
-            background: #6d28d9;
+            background: #4c1d95;
         }
 
         @media (max-width: 480px) {
@@ -822,19 +825,19 @@
                 <div class="grade-badge" id="gradeBadge">Grade</div>
                 <div class="stat-row">
                     <div class="stat-box">
-                        <div class="stat-num" id="statCorrect" style="color:#10b981;">0</div>
+                        <div class="stat-num" id="statCorrect" style="color:#34d399;">0</div>
                         <div class="stat-lbl">Correct</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-num" id="statWrong" style="color:#ef4444;">0</div>
+                        <div class="stat-num" id="statWrong" style="color:#f87171;">0</div>
                         <div class="stat-lbl">Wrong</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-num" id="statSkipped" style="color:#f59e0b;">0</div>
+                        <div class="stat-num" id="statSkipped" style="color:#fbbf24;">0</div>
                         <div class="stat-lbl">Skipped</div>
                     </div>
                 </div>
-                <p id="resultsMessage" style="color:#6b7280;font-size:0.95rem;margin-top:8px;"></p>
+                <p id="resultsMessage" style="color:#7c7a9e;font-size:0.95rem;margin-top:8px;"></p>
             </div>
             <button class="btn-restart" onclick="restartQuiz()">Try Again 🔄</button>
         </div>
@@ -1053,13 +1056,8 @@
             if (currentIndex > 0) { currentIndex--; renderQuestion(); }
         }
 
-        function openQuitModal() {
-            document.getElementById('quitModal').classList.add('active');
-        }
-
-        function closeQuitModal() {
-            document.getElementById('quitModal').classList.remove('active');
-        }
+        function openQuitModal() { document.getElementById('quitModal').classList.add('active'); }
+        function closeQuitModal() { document.getElementById('quitModal').classList.remove('active'); }
 
         function confirmQuit() {
             closeQuitModal();
@@ -1081,14 +1079,17 @@
             document.getElementById('statCorrect').textContent = correct;
             document.getElementById('statWrong').textContent = wrong;
             document.getElementById('statSkipped').textContent = skipped;
-            let grade, color, trophy, msg;
-            if (pct >= 90) { grade = 'Excellent — A'; color = '#065f46'; trophy = '🏆'; msg = 'Outstanding performance, Bevy! You have an excellent grasp of cardiovascular nursing! lopit mo'; }
-            else if (pct >= 80) { grade = 'Good — B'; color = '#1d4ed8'; trophy = '🥈'; msg = 'Great work, Bevy! A strong performance with room to master a few more details. lopit mo pa rins'; }
-            else if (pct >= 75) { grade = 'Passing — C'; color = '#92400e'; trophy = '⭐'; msg = 'You passed, Bevy! Review the questions you missed and try again for a higher score.'; }
-            else { grade = 'Needs Review — D'; color = '#991b1b'; trophy = '📚'; msg = "Keep going, Bevy! Review the module materials and try again — you've got this!"; }
+            let grade, color, bg, trophy, msg;
+            if (pct >= 90) { grade = 'Excellent — A'; color = '#34d399'; bg = '#064e3b'; trophy = '🏆'; msg = 'Outstanding performance, Bevy! You have an excellent grasp of cardiovascular nursing! lopit mo'; }
+            else if (pct >= 80) { grade = 'Good — B'; color = '#60a5fa'; bg = '#1e3a5f'; trophy = '🥈'; msg = 'Great work, Bevy! A strong performance with room to master a few more details. lopit mo pa rins'; }
+            else if (pct >= 75) { grade = 'Passing — C'; color = '#fbbf24'; bg = '#78350f'; trophy = '⭐'; msg = 'You passed, Bevy! Review the questions you missed and try again for a higher score.'; }
+            else { grade = 'Needs Review — D'; color = '#f87171'; bg = '#7f1d1d'; trophy = '📚'; msg = "Keep going, Bevy! Review the module materials and try again — you've got this!"; }
             document.getElementById('trophyEmoji').textContent = trophy;
             const gb = document.getElementById('gradeBadge');
-            gb.textContent = grade; gb.style.background = color + '22'; gb.style.color = color; gb.style.border = '1px solid ' + color + '55';
+            gb.textContent = grade;
+            gb.style.background = bg;
+            gb.style.color = color;
+            gb.style.border = '1px solid ' + color + '55';
             document.getElementById('resultsMessage').textContent = msg;
         }
 

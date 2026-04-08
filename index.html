@@ -1,833 +1,1120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>High-Risk Newborn Module 7 Quizzes</title>
+    <title>NCM 109 | Cardiovascular Disorders Quiz</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #3498db;
-            --success-color: #2ecc71;
-            --danger-color: #e74c3c;
-            --light-bg: #ecf0f1;
-            --white: #ffffff;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-bg);
-            color: var(--primary-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f8f0ff 0%, #e8f4fd 50%, #f0fff8 100%);
             min-height: 100vh;
+            color: #1a1a2e;
         }
 
-        .container {
-            background-color: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            max-width: 800px;
-            width: 100%;
-            padding: 30px;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 26px;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 15px;
-            margin-bottom: 25px;
-        }
-
-        /* Menu Styles */
-        #menu-container {
+        .app {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: clamp(12px, 4vw, 24px);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            padding: 20px 0;
+            justify-content: center;
         }
 
-        .menu-btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.12)
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(24px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        /* WELCOME */
+        .welcome-screen {
+            text-align: center;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .heart-icon {
+            font-size: clamp(40px, 8vw, 56px);
+            margin-bottom: 16px;
+            animation: pulse 1.5s ease-in-out infinite;
+            display: block;
+        }
+
+        .welcome-screen h1 {
+            font-size: clamp(1.3rem, 5vw, 2rem);
+            font-weight: 700;
+            color: #4a2c8a;
+            margin-bottom: 6px;
+        }
+
+        .welcome-screen .subtitle {
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .welcome-screen .greeting {
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            color: #374151;
+            margin: 20px 0 28px;
+            background: white;
+            border-radius: 16px;
+            padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
+            border-left: 4px solid #7c3aed;
+            text-align: left;
+            box-shadow: 0 2px 12px rgba(124, 58, 237, .08);
+        }
+
+        .greeting span {
+            color: #7c3aed;
+            font-weight: 700;
+        }
+
+        .difficulty-section h2 {
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            color: #374151;
+            margin-bottom: 18px;
+        }
+
+        .difficulty-cards {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .diff-card {
+            background: white;
+            border-radius: 16px;
+            padding: clamp(16px, 4vw, 24px) clamp(14px, 3vw, 20px);
+            width: clamp(140px, 28vw, 220px);
             cursor: pointer;
-            width: 100%;
-            max-width: 400px;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: all 0.22s ease;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .07);
+            text-align: center;
         }
 
-        .menu-btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
+        .diff-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, .13);
         }
 
-        .menu-btn.set-b {
-            background-color: #8e44ad;
+        .diff-card.easy:hover {
+            border-color: #10b981;
         }
 
-        .menu-btn.set-b:hover {
-            background-color: #732d91;
+        .diff-card.medium:hover {
+            border-color: #f59e0b;
         }
 
-        /* Quiz Styles */
-        #quiz-container, #results-container {
+        .diff-card.hard:hover {
+            border-color: #ef4444;
+        }
+
+        .diff-icon {
+            font-size: clamp(28px, 5vw, 36px);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .diff-card h3 {
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .diff-card p {
+            font-size: clamp(0.75rem, 2vw, 0.82rem);
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .diff-card .badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 3px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .easy .badge {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .medium .badge {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .hard .badge {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .easy h3 {
+            color: #065f46;
+        }
+
+        .medium h3 {
+            color: #92400e;
+        }
+
+        .hard h3 {
+            color: #991b1b;
+        }
+
+        /* QUIZ */
+        .quiz-screen {
+            animation: fadeIn 0.5s ease;
             display: none;
         }
 
-        .progress-container {
-            margin-bottom: 20px;
-        }
-
-        .progress-text {
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 8px;
+        .quiz-header {
+            background: white;
+            border-radius: 16px;
+            padding: clamp(12px, 3vw, 16px) clamp(14px, 3vw, 20px);
+            margin-bottom: 14px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            gap: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .07);
+            flex-wrap: wrap;
         }
 
-        .progress-bar {
-            height: 10px;
-            background-color: #dfe6e9;
-            border-radius: 5px;
+        .quiz-header-left {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .quiz-header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .quiz-title {
+            font-size: clamp(0.78rem, 2.2vw, 0.9rem);
+            font-weight: 600;
+            color: #6b7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .score-badge {
+            background: #7c3aed;
+            color: white;
+            padding: 6px clamp(10px, 2.5vw, 16px);
+            border-radius: 99px;
+            font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .btn-quit {
+            background: transparent;
+            border: 1.5px solid #e5e7eb;
+            color: #9ca3af;
+            padding: 6px clamp(8px, 2vw, 14px);
+            border-radius: 10px;
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-quit:hover {
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .progress-bar-wrap {
+            background: #e5e7eb;
+            border-radius: 99px;
+            height: 7px;
+            margin-top: 6px;
             overflow: hidden;
         }
 
-        .progress-fill {
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #7c3aed, #06b6d4);
             height: 100%;
-            background-color: var(--accent-color);
-            width: 0%;
-            transition: width 0.3s ease;
+            border-radius: 99px;
+            transition: width 0.4s ease;
+        }
+
+        .progress-text {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-align: right;
+            margin-top: 3px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: clamp(18px, 4vw, 28px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .09);
+            margin-bottom: 14px;
+            animation: slideIn 0.35s ease;
+        }
+
+        .q-meta {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .q-type-badge {
+            padding: 3px 10px;
+            border-radius: 99px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .q-diff-badge {
+            padding: 3px 10px;
+            border-radius: 99px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .badge-easy {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-hard {
+            background: #fee2e2;
+            color: #991b1b;
         }
 
         .question-text {
-            font-size: 18px;
+            font-size: clamp(0.95rem, 3vw, 1.05rem);
             font-weight: 600;
+            color: #1a1a2e;
+            line-height: 1.6;
             margin-bottom: 20px;
-            line-height: 1.5;
         }
 
-        .options-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .option-item {
-            background-color: var(--light-bg);
-            border: 2px solid transparent;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 16px;
-        }
-
-        .option-item:hover:not(.disabled) {
-            background-color: #dbe4e8;
-            border-color: #bdc3c7;
-        }
-
-        .option-item.correct {
-            background-color: #d5f5e3;
-            border-color: var(--success-color);
-            color: #27ae60;
-        }
-
-        .option-item.incorrect {
-            background-color: #fadbd8;
-            border-color: var(--danger-color);
-            color: #c0392b;
-        }
-
-        .option-item.disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .feedback-container {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-            font-size: 15px;
-            line-height: 1.5;
-        }
-
-        .feedback-container.correct-feedback {
-            background-color: #d5f5e3;
-            border-left: 5px solid var(--success-color);
-            display: block;
-        }
-
-        .feedback-container.incorrect-feedback {
-            background-color: #fadbd8;
-            border-left: 5px solid var(--danger-color);
-            display: block;
-        }
-
-        .controls {
+        .options {
             display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
+            flex-direction: column;
+            gap: 9px;
         }
 
-        button.nav-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
+        .option-btn {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: clamp(10px, 2.5vw, 13px) clamp(12px, 3vw, 16px);
+            text-align: left;
             cursor: pointer;
-            transition: background-color 0.2s;
+            font-size: clamp(0.87rem, 2.5vw, 0.95rem);
+            color: #374151;
+            transition: all 0.18s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
         }
 
-        .btn-prev { background-color: #95a5a6; color: white; }
-        .btn-prev:hover { background-color: #7f8c8d; }
-        .btn-prev:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+        .option-btn:hover:not(:disabled) {
+            background: #ede9fe;
+            border-color: #7c3aed;
+            color: #4c1d95;
+        }
 
-        .btn-next { background-color: var(--accent-color); color: white; display: none; }
-        .btn-next:hover { background-color: #2980b9; }
+        .option-btn .opt-letter {
+            font-weight: 700;
+            min-width: 20px;
+            color: #7c3aed;
+            flex-shrink: 0;
+        }
 
-        .results-container {
+        .option-btn.correct {
+            background: #d1fae5;
+            border-color: #10b981;
+            color: #065f46;
+        }
+
+        .option-btn.correct .opt-letter {
+            color: #065f46;
+        }
+
+        .option-btn.wrong {
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+
+        .option-btn.wrong .opt-letter {
+            color: #991b1b;
+        }
+
+        .option-btn.reveal-correct {
+            background: #d1fae5;
+            border-color: #10b981;
+            color: #065f46;
+        }
+
+        .option-btn.reveal-correct .opt-letter {
+            color: #065f46;
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+        }
+
+        .feedback-box {
+            border-radius: 14px;
+            padding: clamp(12px, 3vw, 16px) clamp(14px, 3vw, 18px);
+            margin-top: 14px;
+            font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+            line-height: 1.6;
+            display: none;
+        }
+
+        .feedback-box.correct-fb {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            color: #064e3b;
+        }
+
+        .feedback-box.wrong-fb {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            color: #7f1d1d;
+        }
+
+        .feedback-box .fb-title {
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            margin-bottom: 6px;
+        }
+
+        .feedback-box .fb-info {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(0, 0, 0, .1);
+            font-size: clamp(0.82rem, 2.3vw, 0.88rem);
+        }
+
+        .nav-row {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+
+        .btn-back,
+        .btn-next {
+            padding: clamp(9px, 2.5vw, 11px) clamp(16px, 4vw, 24px);
+            border-radius: 12px;
+            font-size: clamp(0.88rem, 2.5vw, 0.95rem);
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.18s ease;
+        }
+
+        .btn-back {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-back:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-back:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-next {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .btn-next:hover {
+            background: #6d28d9;
+        }
+
+        .btn-next:disabled {
+            background: #c4b5fd;
+            cursor: not-allowed;
+        }
+
+        /* QUIT MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            border-radius: 20px;
+            padding: clamp(24px, 5vw, 36px);
+            max-width: 420px;
+            width: 100%;
             text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
+            animation: modalIn 0.25s ease;
         }
 
-        .results-score {
-            font-size: 48px;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin: 20px 0;
+        .modal-icon {
+            font-size: 44px;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .modal-box h2 {
+            font-size: clamp(1.1rem, 4vw, 1.35rem);
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+
+        .modal-box p {
+            font-size: clamp(0.88rem, 2.5vw, 0.95rem);
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-modal-cancel {
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 2px solid #e5e7eb;
+            background: white;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.18s;
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .btn-modal-cancel:hover {
+            background: #f3f4f6;
+        }
+
+        .btn-modal-quit {
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border: none;
+            background: #ef4444;
+            color: white;
+            cursor: pointer;
+            transition: all 0.18s;
+            flex: 1;
+            max-width: 180px;
+        }
+
+        .btn-modal-quit:hover {
+            background: #dc2626;
+        }
+
+        /* RESULTS */
+        .results-screen {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .results-card {
+            background: white;
+            border-radius: 20px;
+            padding: clamp(24px, 5vw, 36px) clamp(18px, 4vw, 28px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .09);
+            margin-bottom: 20px;
+        }
+
+        .trophy {
+            font-size: clamp(48px, 10vw, 64px);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .results-card h2 {
+            font-size: clamp(1.3rem, 5vw, 1.7rem);
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+        }
+
+        .results-card .score-big {
+            font-size: clamp(2.5rem, 10vw, 3.5rem);
+            font-weight: 800;
+            color: #7c3aed;
+            margin: 12px 0;
+        }
+
+        .results-card .score-label {
+            font-size: clamp(0.88rem, 2.5vw, 1rem);
+            color: #6b7280;
+        }
+
+        .grade-badge {
+            display: inline-block;
+            margin: 14px auto;
+            padding: 8px 28px;
+            border-radius: 99px;
+            font-size: clamp(0.88rem, 2.5vw, 1rem);
+            font-weight: 700;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 18px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: #f9fafb;
+            border-radius: 14px;
+            padding: clamp(10px, 3vw, 14px) clamp(14px, 4vw, 22px);
+            min-width: 90px;
+            flex: 1;
+            max-width: 140px;
+        }
+
+        .stat-box .stat-num {
+            font-size: clamp(1.4rem, 6vw, 1.8rem);
+            font-weight: 800;
+        }
+
+        .stat-box .stat-lbl {
+            font-size: 0.78rem;
+            color: #6b7280;
+            margin-top: 2px;
         }
 
         .btn-restart {
-            background-color: var(--primary-color);
+            background: #7c3aed;
             color: white;
-            margin-top: 20px;
-            padding: 12px 24px;
+            padding: clamp(10px, 2.5vw, 13px) clamp(24px, 6vw, 36px);
+            border-radius: 14px;
+            font-size: clamp(0.92rem, 3vw, 1rem);
+            font-weight: 700;
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
             cursor: pointer;
+            transition: background 0.18s;
+            margin-top: 8px;
         }
-        .btn-restart:hover { background-color: var(--secondary-color); }
-        
-        .error-message {
-            color: var(--danger-color);
-            text-align: center;
-            font-weight: bold;
-            margin-top: 20px;
+
+        .btn-restart:hover {
+            background: #6d28d9;
+        }
+
+        @media (max-width: 480px) {
+            .difficulty-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .diff-card {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .quiz-header {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-modal-cancel,
+            .btn-modal-quit {
+                max-width: 100%;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .diff-card {
+                width: calc(50% - 7px);
+            }
+
+            .difficulty-cards {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
+
 <body>
+    <div class="app">
 
-<div class="container">
-    <h1>Module 7: High-Risk Newborn</h1>
-    <div class="subtitle" id="main-subtitle">Select a knowledge check to begin</div>
-
-    <noscript>
-        <div class="error-message">
-            Error: JavaScript is disabled or not supported in this app/browser. <br><br>
-            Please open this file in a standard web browser like Chrome or Safari.
-        </div>
-    </noscript>
-
-    <div id="menu-container">
-        <button class="menu-btn" id="btn-set-a">Take Set A (Original 30 Items)</button>
-        <button class="menu-btn set-b" id="btn-set-b">Take Set B (New 30 Items)</button>
-    </div>
-
-    <div id="quiz-container">
-        <div class="progress-container">
-            <div class="progress-text">
-                <span id="question-count">Question 1 of 30</span>
-                <span id="score-tracker">Score: 0</span>
+        <!-- WELCOME -->
+        <div class="welcome-screen" id="welcomeScreen">
+            <span class="heart-icon">🫀</span>
+            <h1>Cardiovascular Disorders Quiz</h1>
+            <p class="subtitle">NCM 109-18 | New Era University College of Nursing</p>
+            <div class="greeting">
+                Hey, <span>Bevy</span>! 👋 Welcome to your Module 8 review quiz on Cardiovascular Disorders. Test your
+                knowledge on CHF, Congenital Heart Disease, Rheumatic Fever, and Kawasaki Disease. Choose your
+                difficulty level below. <span>hell yea you got this.</span>
             </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
+            <div class="difficulty-section">
+                <h2>Choose your difficulty level</h2>
+                <div class="difficulty-cards">
+                    <div class="diff-card easy" onclick="startQuiz('easy')" tabindex="0">
+                        <span class="diff-icon">🌿</span>
+                        <h3>Easy</h3>
+                        <p>Definitions, basic concepts, and foundational knowledge</p>
+                        <span class="badge">30 questions</span>
+                    </div>
+                    <div class="diff-card medium" onclick="startQuiz('medium')" tabindex="0">
+                        <span class="diff-icon">⚡</span>
+                        <h3>Medium</h3>
+                        <p>Applied knowledge, nursing interventions & pharmacology</p>
+                        <span class="badge">30 questions</span>
+                    </div>
+                    <div class="diff-card hard" onclick="startQuiz('hard')" tabindex="0">
+                        <span class="diff-icon">🔥</span>
+                        <h3>Hard</h3>
+                        <p>Complex clinical scenarios requiring critical thinking</p>
+                        <span class="badge">30 questions</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="question-text" id="question-text">Loading question...</div>
-        <ul class="options-list" id="options-list"></ul>
-        <div class="feedback-container" id="feedback-container"></div>
+        <!-- QUIZ -->
+        <div class="quiz-screen" id="quizScreen">
+            <div class="quiz-header">
+                <div class="quiz-header-left">
+                    <div class="quiz-title" id="quizTitleLabel">Easy | Cardiovascular Disorders</div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Question 1 of 30</div>
+                </div>
+                <div class="quiz-header-right">
+                    <div class="score-badge" id="scoreBadge">Score: 0</div>
+                    <button class="btn-quit" onclick="openQuitModal()" title="Quit quiz">
+                        <span>✕</span><span>Quit</span>
+                    </button>
+                </div>
+            </div>
 
-        <div class="controls">
-            <button class="nav-btn btn-prev" id="btn-prev" disabled>&#8592; Back</button>
-            <button class="nav-btn btn-next" id="btn-next">Next &#8594;</button>
+            <div class="question-card" id="questionCard">
+                <div class="q-meta">
+                    <span class="q-type-badge" id="qTypeBadge">Concept</span>
+                    <span class="q-diff-badge" id="qDiffBadge">Easy</span>
+                </div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="optionsContainer"></div>
+                <div class="feedback-box" id="feedbackBox">
+                    <div class="fb-title" id="fbTitle"></div>
+                    <div id="fbText"></div>
+                    <div class="fb-info" id="fbInfo"></div>
+                </div>
+            </div>
+
+            <div class="nav-row">
+                <button class="btn-back" id="btnBack" onclick="goBack()">← Back</button>
+                <button class="btn-next" id="btnNext" onclick="goNext()" disabled>Next →</button>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results-screen" id="resultsScreen">
+            <div class="results-card">
+                <span class="trophy" id="trophyEmoji">🏆</span>
+                <h2 id="resultsTitle">Quiz Complete!</h2>
+                <div class="score-big" id="scorePercent">0%</div>
+                <div class="score-label" id="scoreLabel">0 out of 30 correct</div>
+                <div class="grade-badge" id="gradeBadge">Grade</div>
+                <div class="stat-row">
+                    <div class="stat-box">
+                        <div class="stat-num" id="statCorrect" style="color:#10b981;">0</div>
+                        <div class="stat-lbl">Correct</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num" id="statWrong" style="color:#ef4444;">0</div>
+                        <div class="stat-lbl">Wrong</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num" id="statSkipped" style="color:#f59e0b;">0</div>
+                        <div class="stat-lbl">Skipped</div>
+                    </div>
+                </div>
+                <p id="resultsMessage" style="color:#6b7280;font-size:0.95rem;margin-top:8px;"></p>
+            </div>
+            <button class="btn-restart" onclick="restartQuiz()">Try Again 🔄</button>
+        </div>
+
+    </div>
+
+    <!-- QUIT MODAL -->
+    <div class="modal-overlay" id="quitModal">
+        <div class="modal-box">
+            <span class="modal-icon">🚪</span>
+            <h2>Quit this quiz?</h2>
+            <p>Your current progress won't be saved. You'll be taken back to the difficulty selection screen.</p>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="closeQuitModal()">Keep Going</button>
+                <button class="btn-modal-quit" onclick="confirmQuit()">Yes, Quit</button>
+            </div>
         </div>
     </div>
 
-    <div id="results-container" class="results-container">
-        <h2>Quiz Completed!</h2>
-        <p>You have finished this set.</p>
-        <div class="results-score" id="final-score">0 / 30</div>
-        <button class="btn-restart" id="btn-home">Return to Main Menu</button>
-    </div>
-</div>
+    <script>
+        const ALL_QUESTIONS = {
+            easy: [
+                { q: "What is the definition of heart failure?", opts: ["Inability of the heart to pump sufficient blood to meet body needs", "Blockage of a coronary artery leading to myocardial damage", "Inflammation of the pericardium", "Abnormal heart rhythm causing irregular beats"], ans: 0, type: "Concept", info: "Heart failure is defined as the inability of the heart to pump a sufficient amount of blood to meet the metabolic and oxygen needs of the body." },
+                { q: "Which side of the heart pumps blood to the lungs for oxygenation?", opts: ["Left side", "Right side", "Both sides equally", "The atria"], ans: 1, type: "Concept", info: "The right side of the heart pumps blood to the lungs, where it is oxygenated before returning to the left side." },
+                { q: "What vessel carries deoxygenated blood from the upper body back to the heart?", opts: ["Inferior vena cava", "Pulmonary artery", "Superior vena cava", "Aorta"], ans: 2, type: "Concept", info: "Deoxygenated blood from the upper body travels through the superior vena cava (SVC), while blood from the lower body travels through the inferior vena cava (IVC)." },
+                { q: "What valve separates the right atrium from the right ventricle?", opts: ["Mitral valve", "Aortic valve", "Pulmonic valve", "Tricuspid valve"], ans: 3, type: "Concept", info: "Blood mixed in the right atrium goes through the tricuspid valve into the right ventricle." },
+                { q: "Which fetal shunt connects the pulmonary artery to the aorta?", opts: ["Foramen ovale", "Ductus arteriosus", "Ductus venosus", "Patent ductus arteriosus"], ans: 1, type: "Concept", info: "The ductus arteriosus is a conduit connecting the pulmonary artery to the aorta. It allows blood to bypass the high-pressure pulmonary system in fetal circulation." },
+                { q: "What is an atrial septal defect (ASD)?", opts: ["A narrowing of the aortic valve", "An abnormal opening between the atria", "A hole between the ventricles", "Failure of the ductus arteriosus to close"], ans: 1, type: "Concept", info: "ASD is an abnormal opening between the atria that causes an increased flow of oxygenated blood into the right side of the heart." },
+                { q: "Which congenital heart defect is most commonly associated with Down syndrome?", opts: ["Ventricular septal defect", "Tetralogy of Fallot", "Atrioventricular canal defect", "Patent ductus arteriosus"], ans: 2, type: "Concept", info: "Atrioventricular canal defect results from incomplete fusion of the endocardial cushions and is the most common cardiac defect in Down syndrome." },
+                { q: "What drug is used to close a patent ductus arteriosus in premature infants?", opts: ["Digoxin", "Furosemide", "Indomethacin", "Penicillin"], ans: 2, type: "Concept", info: "Indomethacin, a prostaglandin inhibitor, may be administered to close a patent ductus in premature infants and some newborns." },
+                { q: "Tetralogy of Fallot consists of how many defects?", opts: ["2", "3", "4", "5"], ans: 2, type: "Concept", info: "The tetralogy of Fallot includes 4 defects: VSD, pulmonary stenosis, overriding aorta, and right ventricular hypertrophy." },
+                { q: "What are the 'tet spells' associated with Tetralogy of Fallot?", opts: ["Episodes of fever and rash", "Acute episodes of cyanosis and hypoxia", "Sudden weight loss episodes", "Seizures caused by hypercalcemia"], ans: 1, type: "Concept", info: "Acute episodes of cyanosis and hypoxia (hypercyanotic spells), called blue spells or tet spells, occur when the infant's oxygen requirements exceed the blood supply, such as during crying, feeding, or defecating." },
+                { q: "Rheumatic fever is caused by which organism?", opts: ["Staphylococcus aureus", "Group A β-hemolytic streptococcus", "Haemophilus influenzae", "Escherichia coli"], ans: 1, type: "Concept", info: "Rheumatic fever manifests 2 to 6 weeks after an untreated or partially treated group A β-hemolytic streptococcal infection of the upper respiratory tract." },
+                { q: "Which cardiac valve is most commonly affected by rheumatic heart disease?", opts: ["Aortic valve", "Tricuspid valve", "Pulmonic valve", "Mitral valve"], ans: 3, type: "Concept", info: "Rheumatic heart disease affects the cardiac valves, particularly the mitral valve." },
+                { q: "What is Kawasaki disease also known as?", opts: ["Lupus erythematosus", "Mucocutaneous lymph node syndrome", "Henoch-Schönlein purpura", "Systemic juvenile arthritis"], ans: 1, type: "Concept", info: "Kawasaki disease, also known as mucocutaneous lymph node syndrome, is an acute systemic inflammatory illness." },
+                { q: "What is the most serious complication of Kawasaki disease?", opts: ["Renal failure", "Liver cirrhosis", "Cardiac involvement with aneurysms", "Permanent joint deformity"], ans: 2, type: "Concept", info: "Cardiac involvement is the most serious complication of Kawasaki disease; aneurysms can develop." },
+                { q: "What is the optimal therapeutic digoxin level range?", opts: ["0.1 to 0.3 ng/mL", "0.5 to 0.8 ng/mL", "1.0 to 1.5 ng/mL", "2.0 to 2.5 ng/mL"], ans: 1, type: "Concept", info: "The optimal therapeutic digoxin level range is 0.5 to 0.8 ng/mL (0.64-1.02 nmol/L). Toxicity is present when greater than 0.8 ng/mL." },
+                { q: "Left-sided heart failure primarily causes problems in which organ system?", opts: ["Kidneys", "Liver", "Lungs", "Spleen"], ans: 2, type: "Concept", info: "Left-sided heart failure pertains to problems of the lungs, including crackles, wheezes, cough, dyspnea, and tachypnea." },
+                { q: "Right-sided heart failure causes which of the following signs?", opts: ["Pulmonary edema and crackles", "Hepatosplenomegaly and peripheral edema", "Wheezing and nasal flaring", "Cough and cyanosis"], ans: 1, type: "Concept", info: "Right-sided failure pertains to the problems outside the lungs (systemic), including ascites, hepatosplenomegaly, jugular vein distention, and peripheral edema." },
+                { q: "What does the foramen ovale do in fetal circulation?", opts: ["Connects the pulmonary artery to the aorta", "Allows blood to bypass the liver", "Allows oxygenated blood to bypass the lungs between the atria", "Connects the umbilical vein to the IVC"], ans: 2, type: "Concept", info: "The foramen ovale is an opening between atria that allows oxygenated blood to bypass the lungs and continue from the left atrium to the left ventricle and out the ascending aorta." },
+                { q: "In coarctation of the aorta, blood pressure is characteristically:", opts: ["Higher in lower extremities than upper", "Equal in all extremities", "Higher in upper extremities than lower", "Extremely low in all extremities"], ans: 2, type: "Concept", info: "In coarctation of the aorta, blood pressure is higher in the upper extremities than in the lower extremities. Bounding pulses occur in the arms with weak or absent femoral pulses." },
+                { q: "What are the major Jones criteria for rheumatic fever? (Select the correct group)", opts: ["Fever, arthralgia, elevated ESR", "Carditis, polyarthritis, chorea, erythema marginatum, subcutaneous nodules", "Tachycardia, tachypnea, weight gain, fatigue", "Rash, fever, lymphadenopathy, conjunctivitis"], ans: 1, type: "Concept", info: "Major Jones criteria: Carditis, Polyarthritis, Chorea, Erythema marginatum, and Subcutaneous nodules. A diagnosis requires 2 major or 1 major + 2 minor criteria." },
+                { q: "What is erythema marginatum?", opts: ["Swelling of the joints", "Red skin lesions starting on the trunk and spreading peripherally", "Small nontender nodules over the joints", "Involuntary movements of the face"], ans: 1, type: "Concept", info: "Erythema marginatum is red skin lesions starting on the trunk and spreading peripherally. It is one of the major Jones criteria for rheumatic fever." },
+                { q: "What is chorea in rheumatic fever?", opts: ["Inflammation of the heart", "Tender and painful joints", "Involuntary movements of the extremities and face that affects speech", "Small nontender swellings over the joints"], ans: 2, type: "Concept", info: "Chorea refers to involuntary movements of the extremities and face; it affects speech. It is a major criterion in the Jones criteria for rheumatic fever." },
+                { q: "Which medication is given for Kawasaki disease to reduce fever and prevent platelet aggregation?", opts: ["Furosemide", "Indomethacin", "Acetylsalicylic acid (aspirin)", "Digoxin"], ans: 2, type: "Concept", info: "Acetylsalicylic acid (aspirin) is administered for its antipyretic and antiplatelet effects. Additional anticoagulation may be necessary if aneurysms are present." },
+                { q: "What type of blood flow pattern occurs in acyanotic heart disease?", opts: ["Right-to-left shunt", "Left-to-right shunt", "No shunting", "Bidirectional shunting"], ans: 1, type: "Concept", info: "Acyanotic heart disease involves a shunt that moves blood from the arterial to the venous system (oxygenated to unoxygenated blood, or left-to-right shunts)." },
+                { q: "What does VSD stand for?", opts: ["Valvular Stenosis Disorder", "Ventricular Septal Defect", "Vascular Systemic Disease", "Venous Septal Dilation"], ans: 1, type: "Concept", info: "VSD stands for Ventricular Septal Defect — an abnormal opening between the right and left ventricles. Many VSDs close spontaneously during the first year of life." },
+                { q: "What is the normal serum potassium level?", opts: ["2.0 to 3.0 mEq/L", "3.5 to 5.0 mEq/L", "5.5 to 7.0 mEq/L", "1.5 to 2.5 mEq/L"], ans: 1, type: "Concept", info: "Normal serum potassium level is 3.5 to 5.0 mEq/L (3.5-5.0 mmol/L). Hypokalemia is present when level is < 3.5 mEq/L." },
+                { q: "What does Hypoplastic Left Heart Syndrome involve?", opts: ["Overdevelopment of the left ventricle", "Underdevelopment of the left side of the heart resulting in a hypoplastic left ventricle", "Narrowing of the pulmonary artery", "A hole between the atria"], ans: 1, type: "Concept", info: "Hypoplastic Left Heart Syndrome involves underdevelopment of the left side of the heart, resulting in a hypoplastic left ventricle and aortic atresia." },
+                { q: "In Transposition of the Great Arteries, where does the aorta exit from?", opts: ["Left ventricle", "Right atrium", "Right ventricle", "Left atrium"], ans: 2, type: "Concept", info: "In Transposition of the Great Arteries, the pulmonary artery leaves the left ventricle, and the aorta exits from the right ventricle. There is no communication between systemic and pulmonary circulation." },
+                { q: "What position should a child with heart failure be placed in to ease breathing?", opts: ["Prone position", "Trendelenburg position", "Semi-Fowler's position", "Supine with legs elevated"], ans: 2, type: "Concept", info: "The nurse should elevate the head of the bed in a semi-Fowler's position (40-45°) to facilitate breathing and reduce the work of the heart in children with heart failure." },
+                { q: "What is the main purpose of the ductus venosus in fetal circulation?", opts: ["Connect the pulmonary artery to the aorta", "Allow blood to bypass the liver and pass from the umbilical vein to the IVC", "Create an opening between the atria", "Connect the umbilical arteries to the placenta"], ans: 1, type: "Concept", info: "The ductus venosus allows blood returning from the placenta through the umbilical vein to bypass the liver, passing through to the IVC. The highly oxygenated blood is then preferentially guided to the foramen ovale." }
+            ],
+            medium: [
+                { q: "A nurse is about to administer digoxin to a 6-month-old infant. The apical pulse is 88 beats/minute. What should the nurse do?", opts: ["Administer the dose as ordered", "Withhold the dose and notify the physician", "Administer half the dose", "Double the next dose"], ans: 1, type: "Situational", info: "Digoxin should be withheld if the apical pulse is less than 90 to 110 beats/minute in infants and young children. The nurse should withhold the dose and notify the prescribing physician." },
+                { q: "A child with CHF is prescribed furosemide. The nurse should monitor most closely for:", opts: ["Hyperkalemia", "Hypercalcemia", "Hypokalemia", "Hypernatremia"], ans: 2, type: "Situational", info: "Furosemide is a potassium-wasting diuretic. Nurses must monitor for hypokalemia (serum potassium < 3.5 mEq/L), including muscle weakness, cramping, confusion, and ECG changes." },
+                { q: "An infant with CHF is being monitored for fluid retention. Which finding would most concern the nurse?", opts: ["Weight gain of 0.5 kg in one day", "Slight increase in urine output", "Mild tachypnea", "Decrease in irritability"], ans: 0, type: "Situational", info: "A weight gain of 0.5 kg (1 lb) in 1 day is caused by the accumulation of fluid and indicates worsening fluid retention requiring immediate attention." },
+                { q: "Signs of digoxin toxicity in a child include all of the following EXCEPT:", opts: ["Anorexia and poor feeding", "Bradycardia", "Hypertension", "Nausea and vomiting"], ans: 2, type: "Situational", info: "Signs of digoxin toxicity include anorexia, poor feeding, nausea, vomiting, bradycardia, and dysrhythmias. Hypertension is not a sign of digoxin toxicity." },
+                { q: "A child with CHF becomes hypokalemic while on digoxin. The nurse should be aware that:", opts: ["Hypokalemia decreases digoxin toxicity risk", "Hypokalemia potentiates digoxin toxicity", "The digoxin dose should be increased", "Hypokalemia has no effect on digoxin levels"], ans: 1, type: "Situational", info: "Hypokalemia potentiates digoxin toxicity. If hypokalemia signs are present in a child also on digoxin, the nurse must monitor closely for digoxin toxicity." },
+                { q: "Parents of a child with CHF ask why feeding is done in small, frequent amounts. The nurse's best response is:", opts: ["It reduces the risk of aspiration", "It conserves energy and oxygen supply", "It prevents gastroesophageal reflux", "It increases potassium absorption"], ans: 1, type: "Situational", info: "Small, frequent feedings are provided to conserve energy and oxygen supply. Feeding takes significant energy for infants with CHF, and large feedings can increase cardiac workload." },
+                { q: "A 3-year-old child with Tetralogy of Fallot suddenly becomes deeply cyanotic during crying. The nurse should first:", opts: ["Administer oxygen and place in knee-chest (squatting) position", "Prepare for immediate cardiac surgery", "Administer a diuretic", "Place in supine position and call the physician"], ans: 0, type: "Situational", info: "During a 'tet spell', placing the child in the knee-chest position increases systemic vascular resistance, decreasing the right-to-left shunt, and improving oxygenation. Oxygen is also administered." },
+                { q: "What is the significance of clubbing of the fingers in a child with Tetralogy of Fallot?", opts: ["It indicates hypertension", "It is a normal developmental finding", "It is symptomatic of chronic hypoxia", "It indicates iron deficiency anemia"], ans: 2, type: "Situational", info: "Clubbing is an abnormal enlargement in the distal phalanges seen in the fingers. Clubbing is symptomatic of chronic hypoxia; peripheral circulation is diminished and oxygenation of vital organs is compromised." },
+                { q: "A nurse is caring for a child with a VSD. Which assessment finding indicates heart failure?", opts: ["Bradycardia and hypertension", "Tachycardia, fatigue, and scalp diaphoresis", "Strong femoral pulses", "Normal weight gain"], ans: 1, type: "Situational", info: "Signs of heart failure in children include tachycardia (especially at rest), fatigue, irritability, and profuse scalp diaphoresis. These indicate the heart is working harder to compensate for decreased output." },
+                { q: "When administering ACE inhibitors to a child, the nurse should monitor for which complication?", opts: ["Hypertension and hyperkalemia", "Hypotension, renal dysfunction, and cough", "Tachycardia and elevated blood pressure", "Hyponatremia and muscle cramps"], ans: 1, type: "Situational", info: "When ACE inhibitors are administered, the nurse must monitor for hypotension, renal dysfunction, and cough. Assessment includes blood pressure, BUN, creatinine, urine output, and urinary protein." },
+                { q: "The Jones criteria for rheumatic fever requires which combination for diagnosis?", opts: ["3 major criteria", "2 major OR 1 major + 2 minor criteria", "1 major + 1 minor criteria", "4 minor criteria"], ans: 1, type: "Concept", info: "Jones criteria requires 2 Major criteria OR 1 Major + 2 Minor criteria to diagnose rheumatic fever, in addition to evidence of preceding streptococcal infection." },
+                { q: "Anti-inflammatory medications should NOT be given to a child with suspected rheumatic fever until the diagnosis is confirmed because:", opts: ["They worsen cardiac inflammation", "They mask the polyarthritis, making diagnosis difficult", "They cause hypokalemia", "They interact with penicillin"], ans: 1, type: "Situational", info: "Salicylates and anti-inflammatory agents should not be administered before diagnosis is confirmed because these medications mask the polyarthritis, which is an important diagnostic criterion." },
+                { q: "A child with rheumatic fever develops involuntary movements of the extremities. The nurse should:", opts: ["Administer digoxin", "Initiate seizure precautions", "Apply ice packs to extremities", "Begin passive range-of-motion exercises"], ans: 1, type: "Situational", info: "If the child is experiencing chorea (involuntary movements of the extremities and face that affect speech), the nurse should initiate seizure precautions to ensure safety." },
+                { q: "A child with Kawasaki disease is in the subacute stage. Which finding is expected?", opts: ["Acute high fever and red throat", "Desquamation of skin on fingertips and thrombocytosis", "Child appears completely normal", "Strawberry tongue only"], ans: 1, type: "Situational", info: "The subacute stage of Kawasaki disease is characterized by cracking lips, desquamation of skin on the tips of the fingers and toes, joint pain, cardiac manifestations, and thrombocytosis." },
+                { q: "Which vaccine should be avoided for 11 months after IV immunoglobulin therapy in Kawasaki disease?", opts: ["Hepatitis B and influenza", "MMR and varicella vaccines", "Pneumococcal and meningococcal vaccines", "Tetanus and diphtheria vaccines"], ans: 1, type: "Concept", info: "Administration of MMR (measles, mumps, rubella) or varicella vaccine should be avoided for 11 months after intravenous immunoglobulin therapy, as the immunoglobulin can interfere with the vaccine response." },
+                { q: "A child with coarctation of the aorta would show which characteristic blood pressure finding?", opts: ["BP equal in all extremities", "BP lower in upper extremities than lower", "BP higher in upper extremities with weak femoral pulses", "Hypotension in all extremities"], ans: 2, type: "Situational", info: "Coarctation of the aorta causes higher blood pressure in the upper extremities than lower extremities, bounding pulses in the arms, and weak or absent femoral pulses with cool lower extremities." },
+                { q: "Intravenous immunoglobulin (IVIG) is given to children with Kawasaki disease to:", opts: ["Treat bacterial infection", "Reduce fever duration and incidence of coronary artery lesions and aneurysms", "Replace lost immunoglobulins", "Prevent streptococcal infection"], ans: 1, type: "Concept", info: "IVIG is administered to reduce the duration of the fever and the incidence of coronary artery lesions and aneurysms. Since IVIG is a blood product, blood precautions when administering it are warranted." },
+                { q: "A child with pulmonary stenosis has severe narrowing. The nurse expects to observe:", opts: ["Left ventricular hypertrophy", "Decreased left atrial pressure", "Right ventricular hypertrophy and decreased pulmonary blood flow", "Increased pulmonary blood flow"], ans: 2, type: "Concept", info: "Pulmonary stenosis causes resistance to blood flow, resulting in right ventricular hypertrophy and decreased pulmonary blood flow. The right ventricle may be hypoplastic." },
+                { q: "For a child with CHF, which nursing action best helps decrease cardiac demands?", opts: ["Encourage frequent active play", "Organize nursing care to allow uninterrupted rest periods", "Provide large feedings three times a day", "Keep the room brightly lit and stimulating"], ans: 1, type: "Situational", info: "Organizing nursing activities to allow for uninterrupted sleep decreases cardiac demands by promoting rest. Decreasing environmental stimuli and providing rest is crucial in managing CHF." },
+                { q: "Which finding indicates that prostaglandin E1 therapy is needed for a newborn with Hypoplastic Left Heart Syndrome?", opts: ["The ductus arteriosus must be kept open to ensure adequate systemic blood flow", "The ductus must be closed to prevent pulmonary overcirculation", "Prostaglandin increases cardiac contractility", "Prostaglandin prevents cardiac arrhythmias"], ans: 0, type: "Concept", info: "In the preoperative period, the newborn with HLHS requires a continuous infusion of prostaglandin E1 to maintain ductal patency (keep ductus arteriosus open), ensuring adequate systemic blood flow." },
+                { q: "An infant with CHF requires supplemental oxygen. Which delivery method is most appropriate for a young infant?", opts: ["Nasal cannula", "Face mask", "Oxygen hood (oxyhood)", "High-flow nasal cannula only"], ans: 2, type: "Situational", info: "Cool humidified oxygen should be administered using an oxygen hood for young infants. A nasal cannula or face mask is appropriate for older infants and children." },
+                { q: "When teaching parents to administer digoxin at home, which instruction is most critical?", opts: ["Give with high-sodium foods", "Count the apical pulse for 1 minute before administration", "Administer with large amounts of water", "Double dose if one is missed"], ans: 1, type: "Situational", info: "Parents must be instructed to assess the apical heart rate for 1 minute before administration and to withhold digoxin if the pulse is below specified parameters, then notify the healthcare provider." },
+                { q: "What dietary foods high in potassium should be encouraged for children receiving furosemide?", opts: ["Dairy products and white bread", "Bananas, baked potato skins, and peanut butter", "Red meat and eggs", "Processed foods and pickles"], ans: 1, type: "Concept", info: "Foods high in potassium such as bananas, baked potato skins, and peanut butter should be encouraged for children taking furosemide, a potassium-wasting diuretic." },
+                { q: "A child with CHF is monitored for dehydration. Which sign indicates dehydration in an infant?", opts: ["Bulging fontanel and increased urine output", "Sunken fontanel, nonelastic skin turgor, and dry mucous membranes", "Periorbital edema and weight gain", "Jugular vein distention"], ans: 1, type: "Situational", info: "Signs of dehydration in infants include sunken fontanel, nonelastic skin turgor, dry mucous membranes, decreased tear production, decreased urine output, and concentrated urine." },
+                { q: "A parent asks when the foramen ovale closes after birth. The nurse correctly explains that it closes due to:", opts: ["Increased prostaglandin levels", "Increased pressure on the left side of the heart exceeding right side pressure", "Decreased oxygen tension", "Increased pulmonary vascular resistance"], ans: 1, type: "Concept", info: "The foramen ovale closes due to increased pressure on the left side of the heart being higher than on the right, which occurs after birth when pulmonary circulation is established." },
+                { q: "A nurse is teaching parents about signs of aspirin toxicity in a child with Kawasaki disease. Which symptoms should be reported?", opts: ["Increased appetite and weight gain", "Tinnitus, headache, vertigo, and bruising", "Mild drowsiness and fatigue", "Normal bowel movements and clear urine"], ans: 1, type: "Situational", info: "Signs of aspirin toxicity include tinnitus, headache, vertigo, and bruising. Parents should also not administer aspirin if the child has been exposed to chickenpox or the flu (Reye syndrome risk)." },
+                { q: "What is the normal sodium level range?", opts: ["120-130 mEq/L", "135-145 mEq/L", "150-160 mEq/L", "100-110 mEq/L"], ans: 1, type: "Concept", info: "Normal serum sodium level is 135 to 145 mEq/L (135-145 mmol/L). This is important to monitor in children with CHF on diuretic therapy." },
+                { q: "A child with Tetralogy of Fallot is squatting frequently. The nurse explains this is because squatting:", opts: ["Relieves abdominal pain", "Facilitates increased return of blood flow to the heart for oxygenation", "Is a sign of developmental regression", "Decreases systemic vascular resistance"], ans: 1, type: "Situational", info: "Squatting is a compensatory mechanism in children with Tetralogy of Fallot to facilitate increased return of blood flow to the heart for oxygenation by increasing systemic vascular resistance." },
+                { q: "Which assessment finding is characteristic of Patent Ductus Arteriosus?", opts: ["Systolic murmur only", "Machinery-like murmur with widened pulse pressure and bounding pulses", "Silent auscultation", "Diastolic murmur with narrow pulse pressure"], ans: 1, type: "Concept", info: "A characteristic machinery-like murmur is present in PDA. A widened pulse pressure and bounding pulses are also present due to blood flowing from the aorta to the pulmonary artery." },
+                { q: "In Transposition of the Great Arteries, the initial nonsurgical management includes:", opts: ["Immediate surgical correction", "Prostaglandin E1 to keep ductus arteriosus open and balloon atrial septostomy", "Administration of furosemide only", "Placement in knee-chest position"], ans: 1, type: "Concept", info: "Nonsurgical management includes Prostaglandin E1 to keep the ductus arteriosus open and improve blood mixing, and balloon atrial septostomy during cardiac catheterization to increase mixing." },
+                { q: "What nursing instruction regarding CPR should be given to parents of a child with CHF?", opts: ["CPR for children over 1 year is the same as for adults", "Children require a different CPR ratio regardless of age", "Only healthcare providers should perform CPR", "CPR is not beneficial for children with CHF"], ans: 0, type: "Concept", info: "The guidelines for CPR for children older than 1 year of age are the same as the adult. Parents should be instructed in CPR as part of home management of their child with CHF." }
+            ],
+            hard: [
+                { q: "Baby Maria, a 3-week-old premature infant, is diagnosed with a patent ductus arteriosus. She has a bounding pulse and a widened pulse pressure. Indomethacin is prescribed. The parents ask why indomethacin is used instead of surgery. The nurse's best response is:", opts: ["Indomethacin is cheaper than surgery", "Indomethacin, a prostaglandin inhibitor, can close the ductus arteriosus non-surgically in premature infants by reducing prostaglandin levels", "Indomethacin increases cardiac output to compensate for the defect", "Surgery is too risky so indomethacin is always the first choice for all ages"], ans: 1, type: "Situational", info: "Indomethacin is a prostaglandin inhibitor. In fetal and early neonatal life, prostaglandins keep the ductus arteriosus patent. By inhibiting prostaglandins, indomethacin causes the ductus to constrict and close in premature infants." },
+                { q: "A 5-year-old boy admitted for heart failure has a digoxin level of 1.1 ng/mL. His apical pulse is 58 beats/minute. He has been vomiting and shows dysrhythmias on the monitor. The nurse's priority action is:", opts: ["Administer the next dose as scheduled", "Withhold digoxin, notify the physician immediately, and monitor for dysrhythmias", "Increase the digoxin dose", "Administer an additional dose to restore rhythm"], ans: 1, type: "Situational", info: "A digoxin level > 0.8 ng/mL indicates toxicity. Classic signs include anorexia, vomiting, bradycardia, and dysrhythmias. The nurse must withhold digoxin immediately and notify the physician. Normal therapeutic level is 0.5–0.8 ng/mL." },
+                { q: "A nurse is caring for a child with CHF who is on both furosemide and digoxin. The serum potassium is 3.0 mEq/L. Which clinical concern should the nurse prioritize?", opts: ["Increased risk of hypertension from furosemide", "Hypokalemia potentiates digoxin toxicity, increasing risk of fatal dysrhythmias", "The child will need immediate fluid bolus", "No concern—3.0 mEq/L is within normal limits"], ans: 1, type: "Situational", info: "Hypokalemia (K+ < 3.5 mEq/L) potentiates digoxin toxicity. Furosemide wastes potassium, and low potassium in a digitalized patient dramatically increases the risk of dangerous dysrhythmias. Immediate notification and potassium supplementation are needed." },
+                { q: "An 8-month-old infant with Tetralogy of Fallot becomes acutely cyanotic, limp, and less responsive during a morning feeding. The nurse notes the infant is having a hypercyanotic ('tet') spell. What is the correct sequence of interventions?", opts: ["Place supine, call rapid response, start IV antibiotics", "Place in knee-chest position, administer oxygen, notify physician, prepare morphine/propranolol as ordered", "Place prone, administer furosemide, prepare for cardiac catheterization", "Start CPR immediately and prepare for surgery"], ans: 1, type: "Situational", info: "During a tet spell: Place in knee-chest position (increases SVR and decreases R-to-L shunting), administer oxygen, notify physician. Morphine sulfate and propranolol may be ordered. Knee-chest position is the first priority as it immediately improves oxygenation." },
+                { q: "A 7-year-old child is admitted with suspected rheumatic fever following a sore throat 3 weeks ago. The nurse notes fever, painful swollen knees, and a new heart murmur. The physician is considering anti-inflammatory therapy. Which nursing action is most important BEFORE initiating aspirin therapy?", opts: ["Administer aspirin immediately to reduce fever", "Ensure laboratory confirmation of streptococcal infection and confirm the diagnosis before starting aspirin, since aspirin masks polyarthritis", "Start antibiotics without waiting for labs", "Restrict all fluids"], ans: 1, type: "Situational", info: "Anti-inflammatory agents should NOT be given before the diagnosis is confirmed because they mask polyarthritis, which is a major Jones criterion. The diagnosis must be established first. Antibiotics for streptococcal treatment are given, and ASO titers or throat cultures confirm streptococcal infection." },
+                { q: "A 4-year-old child with Kawasaki disease is being discharged. The parents ask why aspirin must be continued at home. The nurse correctly explains:", opts: ["Aspirin prevents recurrence of fever only", "Aspirin is used for its antipyretic and antiplatelet effects to prevent coronary artery thrombosis in the presence of inflammation and possible aneurysms", "Aspirin is a standard antibiotic", "Aspirin increases platelet production to prevent bleeding"], ans: 1, type: "Situational", info: "Aspirin is given for both antipyretic and antiplatelet effects in Kawasaki disease. Because aneurysms may develop and thrombocytosis occurs in the subacute stage, antiplatelet therapy is critical to prevent coronary artery thrombosis." },
+                { q: "A newborn is diagnosed with Hypoplastic Left Heart Syndrome (HLHS). The parents are told the baby needs surgery. Which preoperative management is CRITICAL to maintain the infant's life before surgery?", opts: ["High-dose furosemide to reduce pulmonary edema", "Mechanical ventilation and continuous infusion of prostaglandin E1 to maintain ductal patency", "Immediate closure of the foramen ovale", "Administration of indomethacin"], ans: 1, type: "Situational", info: "In HLHS, systemic blood flow depends entirely on the ductus arteriosus remaining open. Prostaglandin E1 maintains ductal patency. Without it, when the ductus closes, cardiovascular collapse and death occur. Mechanical ventilation manages respiratory status preoperatively." },
+                { q: "During assessment, a nurse notes that a 10-year-old child has higher blood pressure in the arms (150/90 mmHg) than in the legs (90/60 mmHg), bounding radial pulses, and weak femoral pulses. The child complains of headaches. What cardiac defect do these findings suggest?", opts: ["Tetralogy of Fallot", "Patent ductus arteriosus", "Coarctation of the aorta", "Atrial septal defect"], ans: 2, type: "Situational", info: "These are classic signs of Coarctation of the Aorta: higher BP in upper extremities, bounding arm pulses, weak/absent femoral pulses, and cool lower extremities. Children may experience headaches, dizziness, and epistaxis due to upper body hypertension." },
+                { q: "A child with rheumatic fever develops Sydenham's chorea. The parents are alarmed by the child's involuntary movements. Which nursing intervention addresses this complication?", opts: ["Administer a beta blocker", "Initiate seizure precautions and provide a safe environment", "Apply physical restraints", "Administer corticosteroids immediately"], ans: 1, type: "Situational", info: "Chorea involves involuntary movements of the extremities and face that affect speech. The nurse must initiate seizure precautions to prevent injury. The environment must be made safe, and parents need education that chorea is a self-limiting manifestation." },
+                { q: "A nurse is assessing a 2-year-old with suspected congenital heart disease. The child has cyanosis that INCREASES with crying, a characteristic murmur, and mild-to-moderate heart failure. These findings are most consistent with:", opts: ["Atrial septal defect", "Coarctation of the aorta", "Atrioventricular canal defect", "Pulmonary stenosis"], ans: 2, type: "Situational", info: "AV canal defect typically presents with a characteristic murmur, mild to moderate HF, and cyanosis that increases with crying. It is the most common cardiac defect in Down syndrome." },
+                { q: "A 6-year-old child on digoxin has an apical pulse of 62 beats/minute. What is the nurse's most appropriate action?", opts: ["Administer digoxin as ordered since 62 is above 60 in older children", "Withhold the digoxin dose and notify the physician, as threshold is 70 bpm for older children", "Administer the dose after reassessment in 30 minutes", "Document and proceed without intervention"], ans: 1, type: "Situational", info: "Digoxin should be withheld if the apical pulse is less than 70 beats/minute in older children (as prescribed). 62 bpm is below this threshold. The nurse must withhold the dose and notify the physician." },
+                { q: "A newborn's echocardiogram shows the pulmonary artery exiting from the left ventricle and the aorta from the right ventricle. Which diagnosis does this describe, and what is the immediate nonsurgical intervention?", opts: ["Tetralogy of Fallot — administer furosemide", "Transposition of the Great Arteries — Prostaglandin E1 to maintain ductal patency", "Coarctation of aorta — balloon angioplasty", "Hypoplastic left heart — cardiac transplant immediately"], ans: 1, type: "Situational", info: "This describes Transposition of the Great Arteries (TGA). Without intervention, there is no communication between systemic and pulmonary circulation. Prostaglandin E1 is initiated to keep the ductus arteriosus open to allow blood mixing temporarily until balloon atrial septostomy or arterial switch surgery." },
+                { q: "The nurse is caring for a 5-year-old child with right-sided heart failure. Which cluster of findings is most expected?", opts: ["Crackles, wheezing, dyspnea, oliguria", "Hepatosplenomegaly, peripheral edema, ascites, jugular vein distention", "Pulmonary edema, cough, nasal flaring, head bobbing", "Hypotension, bradycardia, bronchospasm"], ans: 1, type: "Situational", info: "Right-sided heart failure causes systemic venous congestion: hepatosplenomegaly, ascites, jugular vein distention, peripheral (dependent) edema, and weight gain. Lung problems (crackles, wheezing) are associated with left-sided failure." },
+                { q: "A parent refuses to give their child with rheumatic fever penicillin because 'the sore throat is gone.' How should the nurse respond?", opts: ["Support the parent's decision since symptoms resolved", "Explain that antibiotic prophylaxis prevents recurrent streptococcal infection, which could worsen rheumatic heart disease, and emphasize lifelong need", "Tell the parent penicillin must be given or the child will be hospitalized", "Simply document the refusal without further action"], ans: 1, type: "Situational", info: "Antibiotic prophylaxis is essential in rheumatic fever to prevent recurrent streptococcal infections, which worsen rheumatic heart disease. Penicillin is typically given IM monthly (up to 10 years or until age 21). Each recurrence can cause additional valve damage." },
+                { q: "An infant with Tetralogy of Fallot is scheduled for palliative surgery. The parents ask what the palliative shunt does. The nurse correctly explains:", opts: ["It repairs all four defects permanently", "It decreases pulmonary blood flow to relieve heart failure", "It increases pulmonary blood flow and oxygen saturation by providing blood from the subclavian artery to the pulmonary arteries", "It closes the ventricular septal defect only"], ans: 2, type: "Situational", info: "The palliative shunt increases pulmonary blood flow and increases oxygen saturation in infants who cannot undergo primary repair. The shunt provides blood flow to the pulmonary arteries from the left or right subclavian artery, increasing pulmonary circulation." },
+                { q: "A 4-year-old with aortic stenosis presents to clinic. The parents say he gets dizzy and complains of chest pain during exercise. The nurse understands this is due to:", opts: ["Increased cardiac output during exercise", "Narrowing of the aortic valve causing resistance to outflow from the left ventricle, resulting in decreased cardiac output, especially during exercise", "A behavioral response to anxiety", "Hypertensive crisis from increased activity"], ans: 1, type: "Situational", info: "Aortic stenosis causes narrowing/stricture of the aortic valve, resulting in resistance to blood flow from the left ventricle into the aorta. This causes decreased cardiac output, left ventricular hypertrophy, and symptoms of exercise intolerance, chest pain, and dizziness during exertion." },
+                { q: "In which stage of Kawasaki disease would the nurse expect to assess conjunctival hyperemia, high fever, red throat, swollen hands, and enlarged cervical lymph nodes?", opts: ["Convalescent stage", "Subacute stage", "Acute stage", "Resolution stage"], ans: 2, type: "Situational", info: "These findings (fever, conjunctival hyperemia, red throat, swollen hands/rash, enlarged cervical lymph nodes) are characteristic of the Acute stage of Kawasaki disease." },
+                { q: "A nurse is preparing to administer IV immunoglobulin (IVIG) to a child with Kawasaki disease. What precaution must the nurse take?", opts: ["Administer rapidly over 15 minutes", "Apply blood precautions since IVIG is a blood product", "No special precautions needed", "Administer with normal saline bolus simultaneously"], ans: 1, type: "Situational", info: "IVIG is a blood product, so blood precautions when administering it are warranted. IVIG reduces the duration of fever and incidence of coronary artery lesions and aneurysms in Kawasaki disease." },
+                { q: "A child with CHF appears restless and has increasing respiratory distress. Lung sounds reveal crackles and wheezes. The nurse identifies this as which type of heart failure and what is the priority intervention?", opts: ["Right-sided failure — administer furosemide to reduce peripheral edema", "Left-sided failure — elevate head of bed, administer oxygen, and notify physician", "Both sided failure — restrict all fluids immediately", "Right-sided failure — position in supine"], ans: 1, type: "Situational", info: "Crackles, wheezes, and respiratory distress indicate left-sided heart failure (fluid in the lungs). Priority interventions include elevating the head of bed (semi-Fowler's), administering cool humidified oxygen, monitoring respiratory rate, and notifying the physician." },
+                { q: "A parent of a child with Kawasaki disease asks when they should call the doctor about fever at home. The nurse instructs them to notify the provider if the temperature is:", opts: ["Above 98.6°F (37°C)", "101°F (38.3°C) or higher", "99.5°F (37.5°C) or higher", "Only if temperature exceeds 104°F (40°C)"], ans: 1, type: "Situational", info: "Parents should notify the health care provider if the temperature is 101°F (38.3°C) or higher. Temperature should be recorded until the child has been afebrile for several days, as fever is expected during Kawasaki disease." },
+                { q: "A nurse is assigned to a premature newborn with a cardiac anomaly. Echocardiography shows an opening between the atria allowing oxygenated blood into the right side of the heart, with right atrial and ventricular enlargement. The infant is asymptomatic. What is the correct diagnosis and management priority?", opts: ["VSD — immediate surgery is required", "ASD — defect may be closed during cardiac catheterization or open repair before school age; monitor for heart failure", "Coarctation — administer antihypertensives", "PDA — administer indomethacin immediately"], ans: 1, type: "Situational", info: "This describes an Atrial Septal Defect (ASD). Right atrial and ventricular enlargement occurs due to increased flow on the right side. The infant may be asymptomatic or develop HF. Management includes closure during cardiac catheterization or open repair, usually before school age." },
+                { q: "A school-age child with Kawasaki disease is on aspirin therapy and anticoagulants. A parent asks if the child can return to playing football. The nurse should advise:", opts: ["Contact sports are fine since inflammation has resolved", "Contact sports should be avoided while on aspirin or anticoagulants due to bleeding risk", "Only swimming is restricted", "No activity restrictions are needed"], ans: 1, type: "Situational", info: "The child should avoid contact sports, if age appropriate, while taking aspirin or anticoagulants. The combination of antiplatelet and anticoagulant therapy increases the risk of serious bleeding from contact injuries." },
+                { q: "A child with CHF has a neutral thermal environment maintained. The nurse explains this is important because cold stress in infants:", opts: ["Decreases heart rate and reduces cardiac demand", "Causes peripheral vasoconstriction, increases oxygen consumption, and worsens hypoxia", "Reduces the need for supplemental oxygen", "Increases urine output and relieves edema"], ans: 1, type: "Situational", info: "Cold stress causes peripheral vasoconstriction and increases metabolic demands, increasing oxygen consumption. Infants respond to cold by kicking and crying to generate heat — this greatly increases cardiac workload and worsens hypoxia in CHF patients." },
+                { q: "During a cardiac catheterization post-procedure assessment, which finding would require the nurse's immediate attention?", opts: ["Heart rate of 88 bpm and blood pressure 100/60", "Weak or absent pulse distal to the catheterization site with pallor and coolness", "Mild bruising at the insertion site", "Urine output of 1.5 mL/kg/hour"], ans: 1, type: "Situational", info: "Loss of pulse distal to the catheterization site, with pallor and coolness, indicates arterial obstruction/thrombosis — a serious vascular complication requiring immediate intervention. This is a priority assessment finding after cardiac catheterization." },
+                { q: "A 5-year-old with CHF receiving furosemide develops muscle weakness, cramping, confusion, and ECG changes showing inverted T waves. The nurse's priority action is:", opts: ["Administer digoxin immediately", "Recognize hypokalemia signs, hold furosemide, check potassium level, notify physician, and anticipate potassium supplementation", "Increase furosemide dose for better diuresis", "Document findings as normal diuretic side effects"], ans: 1, type: "Situational", info: "These are classic signs of hypokalemia (K+ < 3.5 mEq/L): muscle weakness, cramping, confusion, restlessness, and inverted T waves or prominent U waves on ECG. The nurse must hold furosemide, obtain potassium level, notify the physician, and prepare to administer potassium supplementation. This is especially critical if the child is also on digoxin." },
+                { q: "A 3-year-old child with known rheumatic fever who is on monthly penicillin injections develops a sore throat. A classmate is confirmed to have strep throat. What is the nurse's most important instruction?", opts: ["No action needed — prophylaxis is sufficient", "Advise the child to avoid all classmates permanently", "Notify the physician immediately since strep exposure can trigger rheumatic fever recurrence", "Wait 2-3 weeks before seeking care"], ans: 2, type: "Situational", info: "Children with rheumatic fever should inform parents immediately if anyone at school develops streptococcal throat infection. Recurrent streptococcal infections worsen rheumatic heart disease, causing additional valve damage with each episode. Prompt evaluation and treatment is essential." },
+                { q: "A nurse assesses an infant with CHF who has oliguria. The nurse understands that oliguria in CHF occurs because:", opts: ["The kidneys are producing excess urine to eliminate excess fluid", "Decreased cardiac output reduces kidney perfusion, activating the renin-angiotensin-aldosterone system, causing sodium and water retention", "The diuretics the infant is receiving are causing renal failure", "Oliguria is not associated with CHF"], ans: 1, type: "Situational", info: "Decreased cardiac output reduces renal blood flow. The kidneys respond by activating the RAAS system, causing sodium and water retention. This further increases fluid volume, worsening CHF. Oliguria is a sign of both decreased cardiac output and left-sided heart failure." },
+                { q: "A parent asks why their child with a VSD is prone to developing heart failure. The nurse's best physiological explanation is:", opts: ["The VSD causes back-flow of blood into the lungs, causing hypotension", "Blood shunts left-to-right through the VSD due to higher left-sided pressure, increasing pulmonary blood flow and volume overload on the heart", "The VSD blocks all blood flow to the body", "Right-to-left shunting causes severe cyanosis leading to HF"], ans: 1, type: "Situational", info: "VSD is an acyanotic (left-to-right shunt) defect. Because the left ventricle has higher pressure, blood flows through the VSD into the right ventricle, then into the pulmonary circulation. This creates volume overload and increased pulmonary blood flow, causing the heart to work harder, leading to heart failure." },
+                { q: "A 6-year-old with Kawasaki disease is in the convalescent stage. The nurse explains to parents what to expect during this stage:", opts: ["High fever and severe joint pain will return", "The child appears normal, but laboratory signs of inflammation may still be present and the child may have morning joint stiffness", "Desquamation of fingertips is the main feature", "Complete resolution with no further monitoring needed"], ans: 1, type: "Situational", info: "In the convalescent stage, the child appears normal, but signs of inflammation may be present. Other symptoms include irritability that may last 2 months, joint pain persisting several weeks, and morning stiffness. Ongoing monitoring for coronary artery complications is still required." },
+                { q: "During a well-child visit, a 6-month-old infant is noted to have feeding difficulties, diaphoresis during feeding, tachypnea at rest, and failure to thrive. What cardiovascular problem should the nurse suspect?", opts: ["Rheumatic fever", "Kawasaki disease", "Congestive heart failure secondary to a congenital heart defect", "Normal feeding behavior in premature infants"], ans: 2, type: "Situational", info: "Feeding difficulties, profuse diaphoresis (especially scalp diaphoresis), tachypnea at rest, and failure to thrive (poor weight gain) are classic early signs of CHF in infants, most commonly due to an underlying congenital heart defect such as VSD or AV canal defect." }
+            ]
+        };
 
-<script>
-    // --- SET A (Original Questions) ---
-    const setAData = [
-        {
-            question: "A preterm infant is traditionally defined as a live-born infant before the end of which week of gestation?",
-            options: ["Week 34", "Week 37", "Week 38", "Week 42"],
-            answer: 1,
-            explanation: "According to the module, a preterm infant is traditionally defined as a live-born infant before the end of week 37 of gestation."
-        },
-        {
-            question: "Infants who fall below the 10th percentile of weight for their age are classified as:",
-            options: ["Appropriate for gestational age (AGA)", "Low-birth-weight infants (LBW)", "Small for gestational age (SGA)", "Large for gestational age (LGA)"],
-            answer: 2,
-            explanation: "Infants falling below the 10th percentile of weight for their age are considered small for gestational age (SGA), regardless of when they were born."
-        },
-        {
-            question: "When observing the physical characteristics of a preterm infant, a nurse would expect to see:",
-            options: ["A head disproportionately small compared to the body", "Abundant subcutaneous fat making veins invisible", "Lanugo covering the back, forearms, forehead, and sides of the face", "Deep, numerous creases on the soles of the feet"],
-            answer: 2,
-            explanation: "Preterm infants typically have lanugo covering the back, forearms, forehead, and sides of the face. They also have a disproportionately large head, little subcutaneous fat, and few or no sole creases."
-        },
-        {
-            question: "When testing the 'Square Window' (wrist flexion) reflex for gestational age, a premature infant at 28-32 weeks will typically exhibit an angle of:",
-            options: ["0 degrees", "30 degrees", "45 degrees", "90 degrees"],
-            answer: 3,
-            explanation: "In a premature infant at 28-32 weeks, the wrist flexion (square window) will exhibit a 90-degree angle. A full-term infant's hand can be flexed onto the arm (0 degrees)."
-        },
-        {
-            question: "A newborn is being evaluated using the Scarf Sign. The elbow reaches near or across the midline of the chest. This finding indicates the infant is likely:",
-            options: ["Full-term", "Post-term", "Premature", "Large for Gestational Age"],
-            answer: 2,
-            explanation: "In a premature infant, there is less muscle tone/resistance, so the elbow will reach near or across the midline during the Scarf Sign maneuver. In a full-term infant, the elbow will not reach the midline."
-        },
-        {
-            question: "On Ballard's physical maturity assessment, an infant with 'parchment, deep cracking, no vessels' skin would receive a score of:",
-            options: ["1", "2", "3", "4"],
-            answer: 3,
-            explanation: "According to the Ballard physical maturity scale provided, 'parchment, deep cracking, no vessels' corresponds to a score of 4."
-        },
-        {
-            question: "A post-term infant may exhibit post-term syndrome, largely due to what physiological factor?",
-            options: ["Overproduction of surfactant", "Placental function declining after 40 weeks", "Excessive accumulation of subcutaneous fat", "Premature closure of the ductus arteriosus"],
-            answer: 1,
-            explanation: "The placenta appears to function effectively for only 40 weeks. After that, it loses its ability to carry nutrients effectively to the fetus, causing the fetus to lose weight and develop post-term syndrome."
-        },
-        {
-            question: "Which of the following is a common complication that post-term babies are at risk for immediately after birth?",
-            options: ["Hyperglycemia", "Excessive vernix caseosa", "Hypoglycemia", "Underdeveloped fingernails"],
-            answer: 2,
-            explanation: "Post-term babies are at risk for hypoglycemia because the fetus had to use stores of glycogen for nourishment in the final weeks of intrauterine life as placental function decreased."
-        },
-        {
-            question: "A preterm infant develops anemia of prematurity. According to the text, a contributing factor to the destruction of red blood cells in this condition is:",
-            options: ["High levels of Vitamin K", "Low levels of Vitamin E", "Excessive lung surfactant", "Elevated reticulocyte count"],
-            answer: 1,
-            explanation: "Low levels of vitamin E, a substance that normally protects red blood cells against oxidation, contributes to the destruction of red blood cells and anemia in premature infants."
-        },
-        {
-            question: "True apnea of the newborn is defined by a pause in respirations lasting longer than how many seconds, accompanied by bradycardia?",
-            options: ["5 seconds", "10 seconds", "15 seconds", "20 seconds"],
-            answer: 3,
-            explanation: "With true apnea, the pause in respirations is more than 20 seconds and bradycardia does occur. Pauses of 5-10 seconds without bradycardia are considered irregular or periodic respirations."
-        },
-        {
-            question: "To prevent episodes of apnea in a premature infant, the nurse might expect the physician to prescribe which of the following medications to stimulate breathing?",
-            options: ["Indomethacin", "Caffeine (methylxanthine)", "Erythropoietin", "Betamethasone"],
-            answer: 1,
-            explanation: "Caffeine, a methylxanthine, may be prescribed to stimulate breathing and help prevent apneic episodes."
-        },
-        {
-            question: "Hyperbilirubinemia evaluation is indicated when serum bilirubin levels in a term newborn are greater than:",
-            options: ["5 mg/dL", "8 mg/dL", "10 mg/dL", "12 mg/dL"],
-            answer: 3,
-            explanation: "The module states that evaluation for hyperbilirubinemia is indicated when serum levels are greater than 12 mg/dL (180 mcmol/L) in a term newborn."
-        },
-        {
-            question: "During phototherapy for hyperbilirubinemia, a nurse notes a grayish-brown discoloration of the infant's skin. This is known as:",
-            options: ["Acrocyanosis", "Kernicterus", "Bronze baby syndrome", "Harlequin sign"],
-            answer: 2,
-            explanation: "Bronze baby syndrome is a grayish-brown discoloration of the skin that can be a complication of phototherapy, and the physician should be notified."
-        },
-        {
-            question: "When applying phototherapy to a newborn, why is it crucial to remove the eye shields or patches at least once per shift (during feeding)?",
-            options: ["To expose the eyes to therapeutic light", "To inspect for infection/irritation and allow for eye contact/bonding", "To measure the pupillary light reflex accurately", "To prevent the development of retinopathy of prematurity"],
-            answer: 1,
-            explanation: "Eye shields should be removed during feedings to inspect the eyes for infection or irritation and to allow for eye contact and bonding with the parents."
-        },
-        {
-            question: "Acute Bilirubin Encephalopathy (kernicterus) results from the deposition of which substance in the brain cells?",
-            options: ["Conjugated (water-soluble) bilirubin", "Indirect or unconjugated bilirubin", "Meconium", "Lactic acid"],
-            answer: 1,
-            explanation: "Acute Bilirubin Encephalopathy is the destruction of brain cells by invasion of indirect or unconjugated bilirubin, which forms from excessive RBC breakdown."
-        },
-        {
-            question: "In an exchange transfusion to treat severe hyperbilirubinemia, what type of donor blood is exclusively used?",
-            options: ["O Rh-positive", "O Rh-negative", "AB Rh-positive", "The exact blood type of the infant"],
-            answer: 1,
-            explanation: "The text specifies that the type of blood used for an exchange transfusion is O Rh-negative blood."
-        },
-        {
-            question: "A premature infant is diagnosed with a persistent patent ductus arteriosus. What medication might be administered to help close it?",
-            options: ["Surfactant", "Caffeine", "Indomethacin", "Betamethasone"],
-            answer: 2,
-            explanation: "Either indomethacin or ibuprofen may be administered to close the patent ductus arteriosus. A side effect of indomethacin is oliguria."
-        },
-        {
-            question: "A cranial ultrasound of a premature infant reveals bleeding within the lateral ventricle without dilation of the ventricle. This is classified as what grade of intraventricular hemorrhage?",
-            options: ["Grade 1", "Grade 2", "Grade 3", "Grade 4"],
-            answer: 1,
-            explanation: "Grade 2 intraventricular hemorrhage is defined as bleeding within the lateral ventricle without dilation of the ventricle."
-        },
-        {
-            question: "The primary underlying cause of Respiratory Distress Syndrome (RDS) in preterm infants is:",
-            options: ["Meconium aspiration", "Low level or absence of surfactant", "Overhydration during labor", "Bacterial infection in utero"],
-            answer: 1,
-            explanation: "The cause of RDS is a low level or absence of surfactant, the phospholipid that lines alveoli and reduces surface tension to keep them from collapsing."
-        },
-        {
-            question: "A newborn exhibits 'seesaw respirations' and an expiratory grunt. The expiratory grunt is the infant's physiological attempt to:",
-            options: ["Clear mucus from the upper airway", "Increase pressure in alveoli on expiration to keep them from collapsing", "Vocalize distress to the mother", "Decrease pulmonary blood flow"],
-            answer: 1,
-            explanation: "Expiratory grunting is caused by closure of the glottis as it tries to increase the pressure in the alveoli on expiration in order to help keep them from collapsing."
-        },
-        {
-            question: "A nurse is assessing an infant using the Silverman and Andersen index. The infant scores a total of 8. What does this score indicate?",
-            options: ["No respiratory distress", "Moderate distress", "Severe distress", "A perfectly healthy, well infant"],
-            answer: 2,
-            explanation: "On the Silverman and Andersen index, a score of 7 to 10 indicates severe respiratory distress."
-        },
-        {
-            question: "A pregnant woman in preterm labor receives betamethasone. The primary purpose of administering this glucocorticosteroid is to:",
-            options: ["Stop uterine contractions", "Prevent maternal infection", "Quicken the formation of lecithin (surfactant) in the fetus", "Increase fetal weight gain"],
-            answer: 2,
-            explanation: "Glucocorticosteroids, such as betamethasone, are administered to quicken the formation of lecithin (lung surfactant), helping prevent RDS."
-        },
-        {
-            question: "A premature newborn in the NICU has an increasing abdominal girth, gastric residuals of undigested milk, and stools positive for occult blood. These are classic signs of:",
-            options: ["Meconium Aspiration Syndrome", "Retinopathy of Prematurity", "Persistent Patent Ductus Arteriosus", "Necrotizing Enterocolitis (NEC)"],
-            answer: 3,
-            explanation: "Signs of NEC include a distended abdomen (increasing girth), stomach not emptying fully (residuals > 2mL), and stool positive for occult blood."
-        },
-        {
-            question: "Retinopathy of prematurity (ROP) is an acquired ocular disease primarily caused by vasoconstriction of immature retinal blood vessels resulting from exposure to:",
-            options: ["Phototherapy lights", "High oxygen concentrations", "Bacterial infections", "Low temperatures"],
-            answer: 1,
-            explanation: "Immature retinal blood vessels constrict when exposed to high oxygen concentrations. Therefore, strict management of PO2 levels is necessary."
-        },
-        {
-            question: "To decrease the incidence of Sudden Infant Death Syndrome (SIDS), the American Academy of Pediatrics recommends which sleep position for newborns?",
-            options: ["Prone", "Side-lying", "Supine", "Elevated head of bed"],
-            answer: 2,
-            explanation: "The AAP recommends putting newborns to sleep on their back (supine) to reduce the risk of SIDS."
-        },
-        {
-            question: "Meconium aspiration syndrome rarely occurs in extremely low-birth-weight infants because:",
-            options: ["They have strong vagal reflexes to prevent aspiration.", "The substance has not passed far enough in the bowel to be at the rectum.", "They produce excessive amniotic fluid that dilutes the meconium.", "Their lungs are too stiff to inhale fluid."],
-            answer: 1,
-            explanation: "Meconium aspiration does not tend to occur in extremely low-birth-weight infants because meconium has not passed far enough in the bowel to be at the rectum in these infants."
-        },
-        {
-            question: "A chest radiograph of an infant with Meconium Aspiration Syndrome typically reveals:",
-            options: ["A 'ground glass' haziness", "A small, shrunken heart shadow", "Bilateral coarse infiltrates with spaces of hyperaeration (honeycomb effect)", "Total opacification of the left lung base"],
-            answer: 2,
-            explanation: "A chest radiograph of an infant with meconium aspiration will show bilateral coarse infiltrates in the lungs with spaces of hyperaeration (a honeycomb effect)."
-        },
-        {
-            question: "A newborn is assessed with short palpebral fissures, a hypoplastic philtrum, a flat midface, and a thin upper lip. These facial changes are characteristic of:",
-            options: ["Necrotizing enterocolitis", "Post-term syndrome", "Fetal Alcohol Spectrum Disorders (FASD)", "Down Syndrome"],
-            answer: 2,
-            explanation: "Facial changes including short palpebral fissures, a hypoplastic philtrum, a flat midface, and a thin upper lip are assessment findings of Fetal Alcohol Spectrum Disorders."
-        },
-        {
-            question: "A priority nursing intervention for a newborn with Fetal Alcohol Spectrum Disorder (FASD) experiencing poor feeding and irritability is to:",
-            options: ["Increase environmental stimuli to keep the infant awake", "Administer large, infrequent feedings", "Administer small feedings, burp well, and decrease environmental stimuli", "Keep the infant continuously in a prone position"],
-            answer: 2,
-            explanation: "Interventions for FASD include administering small feedings and burping well (due to poor suck/swallow reflex), and decreasing environmental stimuli (due to irritability and hypersensitivity)."
-        },
-        {
-            question: "According to the module's Expected Outcomes, a high-risk infant should be able to maintain body temperature at 37.0°C (98.6°F) in an open crib with:",
-            options: ["No blankets", "One added blanket", "Two added blankets and a hat", "Continuous radiant warmer use"],
-            answer: 1,
-            explanation: "The outcome evaluation states an expected outcome is: 'Infant maintains body temperature at 98.6°F (37.0°C) in open crib with one added blanket.'"
-        }
-    ];
+        let currentDifficulty = '', currentQuestions = [], currentIndex = 0, score = 0, userAnswers = [], answeredFlags = [];
 
-    // --- SET B (New Questions) ---
-    const setBData = [
-        {
-            question: "According to the module, a 'term infant' is born after the beginning of week 38 and before week:",
-            options: ["40 of pregnancy", "41 of pregnancy", "42 of pregnancy", "43 of pregnancy"],
-            answer: 2,
-            explanation: "TERM infants are those born after the beginning of week 38 and before week 42 of pregnancy."
-        },
-        {
-            question: "A very-low-birth-weight (VLBW) infant is defined as an infant weighing:",
-            options: ["Under 2500 g at birth", "Between 1500 g and 2500 g", "Between 1000 g and 1500 g", "Between 500 g and 1000 g"],
-            answer: 2,
-            explanation: "A very-low-birth-weight infant (VLBW) is one weighing 1000 to 1500 g."
-        },
-        {
-            question: "When assessing the female genitalia of a premature infant, a nurse would expect to find:",
-            options: ["Labia minora completely covered by labia majora", "A prominent clitoris and small, widely separated labia majora", "Deep rugae and swelling", "No visible clitoris"],
-            answer: 1,
-            explanation: "In a premature female, the clitoris is very prominent and the labia majora are very small and widely separated."
-        },
-        {
-            question: "Which of the following maternal factors is associated with an increased risk of preterm birth?",
-            options: ["High socioeconomic level", "Age of mother over 35", "Maternal urinary tract infection (UTI)", "A previous post-term birth"],
-            answer: 2,
-            explanation: "Maternal infections (UTI) are listed among the common factors associated with preterm birth, along with low socioeconomic status, smoking, and age less than 20."
-        },
-        {
-            question: "In a physical maturity assessment, an infant at 39-40 weeks' gestation would typically have how much breast tissue?",
-            options: ["No breast tissue", "1-2 mm", "3-4 mm", "5-6 mm"],
-            answer: 3,
-            explanation: "An infant of 39-40 weeks will have 5-6 mm of breast tissue due to maternal hormonal stimulation."
-        },
-        {
-            question: "If an infant receives a total score of 40 points on the Dubowitz/Ballard gestational age scale, what is their estimated gestational age?",
-            options: ["26 weeks", "32 weeks", "38 weeks", "40 weeks"],
-            answer: 3,
-            explanation: "A total score of 40 points is found in infants at term or 40 weeks' gestation."
-        },
-        {
-            question: "A post-term baby may develop polycythemia. This condition is primarily a physiological response to:",
-            options: ["Decreased oxygenation in the final weeks of pregnancy", "Excessive glycogen stores", "Hyperthermia after birth", "Overhydration in utero"],
-            answer: 0,
-            explanation: "Polycythemia may have developed from decreased oxygenation in the final weeks, as the placenta's efficiency declines."
-        },
-        {
-            question: "Which of the following interventions is recommended for an infant experiencing an episode of apnea?",
-            options: ["Administering a cold bath", "Flicking the sole of the foot", "Placing the infant in a prone position", "Deep nasopharyngeal suctioning"],
-            answer: 1,
-            explanation: "Gently stimulating an infant or flicking the sole of the foot often causes the baby to breathe again during an apneic episode."
-        },
-        {
-            question: "To help prevent the development of anemia of prematurity immediately at birth, which practice may be utilized?",
-            options: ["Immediate cord clamping", "Delayed cord clamping", "Prophylactic blood transfusion", "Administration of surfactant"],
-            answer: 1,
-            explanation: "Delayed cord clamping at birth allows a little more blood from the placenta to enter the infant, helping reduce the development of anemia."
-        },
-        {
-            question: "When assessing a newborn for jaundice, the nurse should note that jaundice typically starts at the:",
-            options: ["Feet and spreads upward", "Abdomen and spreads outward", "Head and spreads downward", "Hands and spreads inward"],
-            answer: 2,
-            explanation: "Jaundice starts at the head first and spreads to the chest, abdomen, arms, legs, and finally hands and feet."
-        },
-        {
-            question: "During phototherapy treatment, it is essential for the nurse to cover the infant's:",
-            options: ["Entire abdomen", "Genital area and eyes", "Hands and feet", "Umbilical stump with a sterile dressing"],
-            answer: 1,
-            explanation: "During phototherapy, the nurse must cover the genital area (to prevent irritation) and the newborn's eyes with shields/patches."
-        },
-        {
-            question: "A newborn receiving phototherapy begins passing loose, green stools. The nurse should recognize this as:",
-            options: ["A sign of necrotizing enterocolitis", "An expected finding during treatment", "A symptom of meconium aspiration", "An indication of severe dehydration"],
-            answer: 1,
-            explanation: "Expect loose green stools during phototherapy, as bilirubin is being broken down and excreted."
-        },
-        {
-            question: "Why is early, frequent feeding encouraged for infants with hyperbilirubinemia or acute bilirubin encephalopathy risk?",
-            options: ["To prevent post-term hypoglycemia", "To provide fat-soluble vitamins to protect RBCs", "To stimulate bowel peristalsis and excrete bilirubin through feces", "To increase urine output for renal excretion of bilirubin"],
-            answer: 2,
-            explanation: "Early feeding stimulates bowel peristalsis, hastening the passage of meconium and encouraging the excretion of bilirubin through the feces."
-        },
-        {
-            question: "When preparing donor blood for a newborn exchange transfusion, the blood must be maintained at:",
-            options: ["Room temperature", "Body temperature (98.6 F)", "Refrigerated temperature", "Heated above 100 F"],
-            answer: 0,
-            explanation: "Donor blood must be maintained at room temperature to prevent hypothermia during the exchange transfusion."
-        },
-        {
-            question: "A Grade 3 periventricular/intraventricular hemorrhage is characterized by:",
-            options: ["Bleeding in the germinal matrix only", "Bleeding within the lateral ventricle without dilation", "Bleeding causing enlargement of ventricles", "Bleeding in the intraparenchymal tissue"],
-            answer: 2,
-            explanation: "Grade 3 is defined as bleeding causing enlargement of ventricles."
-        },
-        {
-            question: "A potential long-term complication of intraventricular hemorrhage (IVH) due to bleeding into the narrow aqueduct of Sylvius is:",
-            options: ["Retinopathy", "Hydrocephalus", "Necrotizing Enterocolitis", "Persistent Patent Ductus Arteriosus"],
-            answer: 1,
-            explanation: "A long-term effect of hemorrhage may be the development of hydrocephalus if there is bleeding into the narrow aqueduct of Sylvius."
-        },
-        {
-            question: "Because of noncompliant lungs in Respiratory Distress Syndrome, how much pressure is required for the infant to inspire a first breath?",
-            options: ["10 to 15 cm H2O", "15 to 20 cm H2O", "20 to 30 cm H2O", "40 to 70 cm H2O"],
-            answer: 3,
-            explanation: "High pressure is required to fill the lungs with air for the first time... between 40 and 70 cm H2O to inspire a first breath."
-        },
-        {
-            question: "Which of the following is an early, subtle sign of Respiratory Distress Syndrome (RDS) in a premature infant?",
-            options: ["Tachypnea (more than 60 respirations per minute)", "Pink mucous membranes", "Hyperthermia", "Vigorous crying"],
-            answer: 0,
-            explanation: "Subtle signs that appear as RDS progresses include low body temperature, nasal flaring, and tachypnea (more than 60 respirations per minute)."
-        },
-        {
-            question: "Following the intratracheal administration of surfactant to a preterm infant, the nurse should ensure they DO NOT:",
-            options: ["Change the infant's position", "Assess pulse oximetry", "Suction the endotracheal tube for 1 hour", "Provide supplemental oxygen"],
-            answer: 2,
-            explanation: "The nurse must not suction the endotracheal tube for 1 hour after administration to avoid removing the drug."
-        },
-        {
-            question: "To ventilate an infant with stiff, noncompliant lungs due to RDS without causing pneumothorax, infant ventilators use a reversed inspiratory/expiratory (I/E) ratio of:",
-            options: ["1:2", "2:1", "1:4", "3:1"],
-            answer: 1,
-            explanation: "Infant ventilators are available with a reversed I/E ratio (2:1) to deliver oxygen to stiff lungs without excessive force."
-        },
-        {
-            question: "In the management of severe hypoxemia in newborns, Nitric Oxide is administered because it acts as a:",
-            options: ["Bronchoconstrictor", "Potent pulmonary vascular dilator", "Surfactant substitute", "Red blood cell stimulant"],
-            answer: 1,
-            explanation: "Nitric oxide is a potent vascular dilator. It causes pulmonary vasodilation without decreasing systemic vascular tone."
-        },
-        {
-            question: "What does ECMO stand for in the context of treating severe neonatal respiratory illnesses?",
-            options: ["External Cardiac Monitoring Output", "Extracorporeal Membrane Oxygenation", "Early Continuous Mandatory Oxygen", "Extra Cardiopulmonary Mechanical Oxygenation"],
-            answer: 1,
-            explanation: "ECMO stands for Extracorporeal Membrane Oxygenation, used for severe hypoxemia in illnesses like meconium aspiration and RDS."
-        },
-        {
-            question: "The primary medical intervention to rest the GI tract in an infant diagnosed with Necrotizing Enterocolitis (NEC) is to:",
-            options: ["Provide small, frequent oral milk feeds", "Administer high-dose steroids", "Maintain the infant on IV or total parenteral nutrition (TPN)", "Perform an immediate laparotomy"],
-            answer: 2,
-            explanation: "The infant is maintained on IV or total parenteral nutrition (TPN) solutions to rest the GI tract."
-        },
-        {
-            question: "A low-birth-weight newborn received prolonged oxygen therapy. A follow-up examination for Retinopathy of Prematurity (ROP) should occur before hospital discharge and again at:",
-            options: ["1 to 2 weeks of age", "4 to 6 weeks of age", "3 to 4 months of age", "1 year of age"],
-            answer: 1,
-            explanation: "The eyes should be examined before discharge and again at age 4 to 6 weeks of age to detect any occurrence of ROP."
-        },
-        {
-            question: "In addition to a supine sleep position, which of the following is recommended by the AAP to reduce the risk of SIDS?",
-            options: ["Bed sharing with parents", "Use of a pacifier at sleep times", "Use of soft, plush bedding", "Keeping the room temperature highly elevated"],
-            answer: 1,
-            explanation: "The AAP recommends putting newborns to sleep on their back and with a pacifier, using a firm sleep surface, and avoiding soft beddings/overheating."
-        },
-        {
-            question: "When counseling parents immediately after the sudden loss of an infant to SIDS, it is normal for the nurse to hear parents:",
-            options: ["Blame the medical staff exclusively", "Refuse to speak about the child", "Use both the past and present tense when talking about the child", "Immediately begin planning for another child"],
-            answer: 2,
-            explanation: "In discussing the child, parents often use both the past and present tense as if they are not yet aware of the death."
-        },
-        {
-            question: "Meconium is expelled into the amniotic fluid in utero primarily due to a vagal reflex stimulated by:",
-            options: ["Fetal hyperglycemia", "Maternal dehydration", "Fetal hypoxia", "Uterine hyperstimulation"],
-            answer: 2,
-            explanation: "If hypoxia occurs, a vagal reflex is stimulated, resulting in relaxation of the rectal sphincter, releasing meconium."
-        },
-        {
-            question: "A therapeutic management technique used during labor to dilute the amount of meconium in amniotic fluid and reduce aspiration risk is:",
-            options: ["Amnioinfusion", "Tocolytic administration", "External cephalic version", "Epidural anesthesia"],
-            answer: 0,
-            explanation: "Amnioinfusion can be used to dilute the amount of meconium in amniotic fluid and reduce the risk of aspiration."
-        },
-        {
-            question: "Which of the following congenital anomalies is an assessment finding commonly associated with Fetal Alcohol Spectrum Disorders (FASD)?",
-            options: ["Spina bifida", "Congenital heart disorders", "Cleft palate", "Clubfoot"],
-            answer: 1,
-            explanation: "Congenital heart disorders are listed as a key assessment finding for FASD, along with facial changes and abnormal palmar creases."
-        },
-        {
-            question: "A high-risk newborn has a temperature of 96.8 F (36.0 C). Which nursing diagnosis is most appropriate?",
-            options: ["Ineffective airway clearance", "Ineffective cardiovascular tissue perfusion", "Risk for deficient fluid volume", "Ineffective thermoregulation"],
-            answer: 3,
-            explanation: "A low temperature points to 'Ineffective thermoregulation related to newborn status and stress from birth weight variation.'"
-        }
-    ];
-
-    let currentQuizData = [];
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let userAnswers = [];
-    let answeredCurrent = false;
-    let currentSetName = "";
-
-    document.addEventListener("DOMContentLoaded", function() {
-        const menuContainer = document.getElementById('menu-container');
-        const quizContainer = document.getElementById('quiz-container');
-        const resultsContainer = document.getElementById('results-container');
-        const mainSubtitle = document.getElementById('main-subtitle');
-        
-        const questionTextEl = document.getElementById('question-text');
-        const optionsListEl = document.getElementById('options-list');
-        const feedbackContainerEl = document.getElementById('feedback-container');
-        const btnNext = document.getElementById('btn-next');
-        const btnPrev = document.getElementById('btn-prev');
-        const questionCountEl = document.getElementById('question-count');
-        const scoreTrackerEl = document.getElementById('score-tracker');
-        const progressFillEl = document.getElementById('progress-fill');
-        const finalScoreEl = document.getElementById('final-score');
-
-        // Menu Buttons
-        document.getElementById('btn-set-a').addEventListener('click', () => startQuiz(setAData, 'Set A'));
-        document.getElementById('btn-set-b').addEventListener('click', () => startQuiz(setBData, 'Set B'));
-        document.getElementById('btn-home').addEventListener('click', showMenu);
-
-        function showMenu() {
-            menuContainer.style.display = 'flex';
-            quizContainer.style.display = 'none';
-            resultsContainer.style.display = 'none';
-            mainSubtitle.innerText = "Select a knowledge check to begin";
+        function startQuiz(difficulty) {
+            currentDifficulty = difficulty;
+            currentQuestions = ALL_QUESTIONS[difficulty];
+            currentIndex = 0; score = 0;
+            userAnswers = new Array(30).fill(null);
+            answeredFlags = new Array(30).fill(false);
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+            const labels = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+            document.getElementById('quizTitleLabel').textContent = labels[difficulty] + ' | Cardiovascular Disorders';
+            renderQuestion();
         }
 
-        function startQuiz(dataArray, setName) {
-            currentQuizData = dataArray;
-            currentSetName = setName;
-            currentQuestionIndex = 0;
-            score = 0;
-            userAnswers = new Array(currentQuizData.length).fill(null);
-            
-            mainSubtitle.innerText = `${setName} Active`;
-            menuContainer.style.display = 'none';
-            quizContainer.style.display = 'block';
-            resultsContainer.style.display = 'none';
-            
-            loadQuestion();
-        }
-
-        function updateProgress() {
-            questionCountEl.innerText = `Question ${currentQuestionIndex + 1} of ${currentQuizData.length}`;
-            scoreTrackerEl.innerText = `Score: ${score}`;
-            const percent = ((currentQuestionIndex) / currentQuizData.length) * 100;
-            progressFillEl.style.width = `${percent}%`;
-        }
-
-        function loadQuestion() {
-            answeredCurrent = userAnswers[currentQuestionIndex] !== null;
-            const currentData = currentQuizData[currentQuestionIndex];
-            
-            questionTextEl.innerText = `${currentQuestionIndex + 1}. ${currentData.question}`;
-            optionsListEl.innerHTML = '';
-            feedbackContainerEl.style.display = 'none';
-            feedbackContainerEl.className = 'feedback-container';
-
-            currentData.options.forEach((optionText, index) => {
-                const li = document.createElement('li');
-                li.className = 'option-item';
-                li.innerText = optionText;
-                
-                if (answeredCurrent) {
-                    li.classList.add('disabled');
-                    if (index === currentData.answer) {
-                        li.classList.add('correct');
-                    } else if (index === userAnswers[currentQuestionIndex]) {
-                        li.classList.add('incorrect');
-                    }
-                } else {
-                    li.onclick = () => selectOption(index, li);
+        function renderQuestion() {
+            const q = currentQuestions[currentIndex];
+            const total = currentQuestions.length;
+            document.getElementById('progressBar').style.width = ((currentIndex / total) * 100) + '%';
+            document.getElementById('progressText').textContent = 'Question ' + (currentIndex + 1) + ' of ' + total;
+            document.getElementById('scoreBadge').textContent = 'Score: ' + score;
+            const diffClasses = { easy: 'badge-easy', medium: 'badge-medium', hard: 'badge-hard' };
+            const diffLabels = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+            document.getElementById('qTypeBadge').textContent = q.type;
+            const diffBadge = document.getElementById('qDiffBadge');
+            diffBadge.textContent = diffLabels[currentDifficulty];
+            diffBadge.className = 'q-diff-badge ' + diffClasses[currentDifficulty];
+            document.getElementById('questionText').textContent = (currentIndex + 1) + '. ' + q.q;
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            const letters = ['A', 'B', 'C', 'D'];
+            q.opts.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = '<span class="opt-letter">' + letters[i] + '.</span><span>' + opt + '</span>';
+                btn.onclick = () => selectAnswer(i);
+                if (answeredFlags[currentIndex]) {
+                    btn.disabled = true;
+                    const ua = userAnswers[currentIndex];
+                    if (i === q.ans) btn.classList.add('reveal-correct');
+                    if (i === ua && ua !== q.ans) btn.classList.add('wrong');
+                    if (i === ua && ua === q.ans) { btn.classList.remove('reveal-correct'); btn.classList.add('correct'); }
                 }
-                optionsListEl.appendChild(li);
+                container.appendChild(btn);
             });
-
-            btnPrev.disabled = currentQuestionIndex === 0;
-            
-            if (answeredCurrent) {
-                showFeedback(userAnswers[currentQuestionIndex] === currentData.answer, currentData.explanation);
-                btnNext.style.display = 'block';
-                if (currentQuestionIndex === currentQuizData.length - 1) {
-                    btnNext.innerText = 'Finish Quiz';
-                } else {
-                    btnNext.innerText = 'Next \u2192';
-                }
-            } else {
-                btnNext.style.display = 'none';
-            }
-
-            updateProgress();
+            const fb = document.getElementById('feedbackBox');
+            if (answeredFlags[currentIndex]) { showFeedback(userAnswers[currentIndex] === q.ans, q); }
+            else { fb.style.display = 'none'; fb.className = 'feedback-box'; }
+            document.getElementById('btnNext').disabled = !answeredFlags[currentIndex];
+            document.getElementById('btnBack').disabled = currentIndex === 0;
         }
 
-        function selectOption(selectedIndex, selectedElement) {
-            if (answeredCurrent) return;
-            answeredCurrent = true;
-            userAnswers[currentQuestionIndex] = selectedIndex;
-            
-            const currentData = currentQuizData[currentQuestionIndex];
-            const isCorrect = (selectedIndex === currentData.answer);
-            
-            if (isCorrect) score++;
-
-            const allOptions = optionsListEl.children;
-            for (let i = 0; i < allOptions.length; i++) {
-                allOptions[i].classList.add('disabled');
-                allOptions[i].onclick = null; 
-                
-                if (i === currentData.answer) {
-                    allOptions[i].classList.add('correct');
-                } else if (i === selectedIndex && !isCorrect) {
-                    allOptions[i].classList.add('incorrect');
-                }
-            }
-
-            showFeedback(isCorrect, currentData.explanation);
-            scoreTrackerEl.innerText = `Score: ${score}`;
-
-            btnNext.style.display = 'block';
-            if (currentQuestionIndex === currentQuizData.length - 1) {
-                btnNext.innerText = 'Finish Quiz';
-            } else {
-                btnNext.innerText = 'Next \u2192';
-            }
+        function selectAnswer(idx) {
+            if (answeredFlags[currentIndex]) return;
+            const q = currentQuestions[currentIndex];
+            userAnswers[currentIndex] = idx;
+            answeredFlags[currentIndex] = true;
+            if (idx === q.ans) score++;
+            const btns = document.querySelectorAll('.option-btn');
+            btns.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === q.ans) btn.classList.add('reveal-correct');
+                if (i === idx && idx !== q.ans) btn.classList.add('wrong');
+                if (i === idx && idx === q.ans) { btn.classList.remove('reveal-correct'); btn.classList.add('correct'); }
+            });
+            showFeedback(idx === q.ans, q);
+            document.getElementById('scoreBadge').textContent = 'Score: ' + score;
+            document.getElementById('btnNext').disabled = false;
         }
 
-        function showFeedback(isCorrect, explanation) {
-            feedbackContainerEl.style.display = 'block';
-            if (isCorrect) {
-                feedbackContainerEl.className = 'feedback-container correct-feedback';
-                feedbackContainerEl.innerHTML = `<strong>Correct!</strong><br><br>${explanation}`;
+        function showFeedback(correct, q) {
+            const fb = document.getElementById('feedbackBox');
+            const letters = ['A', 'B', 'C', 'D'];
+            fb.style.display = 'block';
+            if (correct) {
+                fb.className = 'feedback-box correct-fb';
+                document.getElementById('fbTitle').textContent = 'Correct!';
+                document.getElementById('fbText').textContent = 'You selected the right answer.';
             } else {
-                feedbackContainerEl.className = 'feedback-container incorrect-feedback';
-                feedbackContainerEl.innerHTML = `<strong>Incorrect.</strong><br><br>${explanation}`;
+                fb.className = 'feedback-box wrong-fb';
+                document.getElementById('fbTitle').textContent = 'Not quite right.';
+                document.getElementById('fbText').textContent = 'The correct answer is ' + letters[q.ans] + ': ' + q.opts[q.ans];
             }
+            document.getElementById('fbInfo').textContent = '📖 Module Insight: ' + q.info;
         }
 
-        btnNext.addEventListener('click', () => {
-            if (currentQuestionIndex < currentQuizData.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        });
+        function goNext() {
+            if (currentIndex < currentQuestions.length - 1) {
+                currentIndex++;
+                renderQuestion();
+                document.getElementById('questionCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else { showResults(); }
+        }
 
-        btnPrev.addEventListener('click', () => {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                loadQuestion();
-            }
-        });
+        function goBack() {
+            if (currentIndex > 0) { currentIndex--; renderQuestion(); }
+        }
+
+        function openQuitModal() {
+            document.getElementById('quitModal').classList.add('active');
+        }
+
+        function closeQuitModal() {
+            document.getElementById('quitModal').classList.remove('active');
+        }
+
+        function confirmQuit() {
+            closeQuitModal();
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('welcomeScreen').style.display = 'block';
+        }
 
         function showResults() {
-            quizContainer.style.display = 'none';
-            resultsContainer.style.display = 'block';
-            mainSubtitle.innerText = "Results";
-            
-            const percentage = Math.round((score / currentQuizData.length) * 100);
-            finalScoreEl.innerText = `${score} / ${currentQuizData.length} (${percentage}%)`;
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+            const total = currentQuestions.length;
+            const correct = score;
+            const wrong = answeredFlags.filter((f, i) => f && userAnswers[i] !== currentQuestions[i].ans).length;
+            const skipped = answeredFlags.filter(f => !f).length;
+            const pct = Math.round((correct / total) * 100);
+            document.getElementById('scorePercent').textContent = pct + '%';
+            document.getElementById('scoreLabel').textContent = correct + ' out of ' + total + ' correct';
+            document.getElementById('statCorrect').textContent = correct;
+            document.getElementById('statWrong').textContent = wrong;
+            document.getElementById('statSkipped').textContent = skipped;
+            let grade, color, trophy, msg;
+            if (pct >= 90) { grade = 'Excellent — A'; color = '#065f46'; trophy = '🏆'; msg = 'Outstanding performance, Bevy! You have an excellent grasp of cardiovascular nursing! lopit mo'; }
+            else if (pct >= 80) { grade = 'Good — B'; color = '#1d4ed8'; trophy = '🥈'; msg = 'Great work, Bevy! A strong performance with room to master a few more details. lopit mo pa rins'; }
+            else if (pct >= 75) { grade = 'Passing — C'; color = '#92400e'; trophy = '⭐'; msg = 'You passed, Bevy! Review the questions you missed and try again for a higher score.'; }
+            else { grade = 'Needs Review — D'; color = '#991b1b'; trophy = '📚'; msg = "Keep going, Bevy! Review the module materials and try again — you've got this!"; }
+            document.getElementById('trophyEmoji').textContent = trophy;
+            const gb = document.getElementById('gradeBadge');
+            gb.textContent = grade; gb.style.background = color + '22'; gb.style.color = color; gb.style.border = '1px solid ' + color + '55';
+            document.getElementById('resultsMessage').textContent = msg;
         }
-    });
-</script>
 
+        function restartQuiz() {
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('welcomeScreen').style.display = 'block';
+        }
+
+        document.getElementById('quitModal').addEventListener('click', function (e) {
+            if (e.target === this) closeQuitModal();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (document.getElementById('quitModal').classList.contains('active')) {
+                if (e.key === 'Escape') closeQuitModal();
+                return;
+            }
+            if (document.getElementById('quizScreen').style.display === 'block') {
+                const keys = { '1': 0, '2': 1, '3': 2, '4': 3, 'a': 0, 'b': 1, 'c': 2, 'd': 3 };
+                if (keys[e.key.toLowerCase()] !== undefined && !answeredFlags[currentIndex]) selectAnswer(keys[e.key.toLowerCase()]);
+                if (e.key === 'ArrowRight' && answeredFlags[currentIndex]) goNext();
+                if (e.key === 'ArrowLeft' && currentIndex > 0) goBack();
+            }
+        });
+    </script>
 </body>
+
 </html>
